@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sơ đồ tương tác - Bộ Nội vụ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1 id="title">Sơ đồ tương tác - Bộ Nội vụ</h1>
+      <div class="sub">Bấm vào một đơn vị để xem các mối quan hệ. Esc để bỏ chọn.</div>
+    </div>
+    <div class="top-actions">
+      <a class="badge link" href="index.html">Sơ đồ cơ cấu tổ chức →</a>
+      <span class="badge">Dữ liệu: bản dự thảo</span>
+    </div>
+  </header>
+
+  <div class="layout">
+    <main class="canvas-wrap">
+      <div id="stage" class="stage">
+        <section class="tier" data-tier="bo">
+          <div class="tier-label">Bộ Nội vụ</div>
+          <div class="bo-box">
+            <div class="ldb-row" id="row-ldb"></div>
+            <div class="groups" id="groups"></div>
+          </div>
+        </section>
+        <section class="tier" data-tier="bottom">
+          <div class="tier-label">Địa phương</div>
+          <div class="tier-row" id="row-bottom"></div>
+        </section>
+        <svg id="edges" class="edges"></svg>
+      </div>
+    </main>
+
+    <aside class="side">
+      <div class="panel">
+        <input id="search" type="search" placeholder="Tìm đơn vị..." autocomplete="off">
+        <div id="search-results" class="search-results"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">Loại quan hệ</div>
+        <div id="legend" class="legend"></div>
+        <div class="btn-row">
+          <button id="btn-all" class="btn">Hiện toàn bộ quan hệ</button>
+          <button id="btn-clear" class="btn ghost">Bỏ chọn</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">Quy trình</div>
+        <select id="process"></select>
+        <div id="process-box" class="process-box hidden">
+          <div class="btn-row">
+            <button id="p-prev" class="btn ghost">◀ Trước</button>
+            <button id="p-play" class="btn">▶ Tự chạy</button>
+            <button id="p-next" class="btn ghost">Tiếp ▶</button>
+          </div>
+          <ol id="steps" class="steps"></ol>
+        </div>
+      </div>
+
+      <div class="panel grow">
+        <div id="detail" class="detail"></div>
+      </div>
+    </aside>
+  </div>
+
+  <div id="tooltip" class="tooltip hidden"></div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -3,76 +3,266 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sơ đồ tương tác - Bộ Nội vụ</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Cơ cấu tổ chức - Bộ Nội vụ</title>
+  <style>
+    :root {
+      --navy: #0B2A57;
+      --unit: #133A7C;
+      --line: #A9C1E3;
+      --box-border: #BFD3EE;
+      --bg: #F4F6FA;
+      --dot: #D3DAE6;
+      --text: #1B2433;
+      --muted: #5B667A;
+      --font: "Times New Roman", Times, serif;
+      --ui: "Segoe UI", Roboto, Arial, sans-serif;
+      --gap: 22px;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; }
+    body {
+      background: var(--bg); color: var(--text); font-family: var(--ui);
+      display: flex; flex-direction: column;
+    }
+
+    .topbar {
+      background: var(--navy); color: #fff; padding: 10px 24px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    }
+    .topbar .hint { font-size: 13px; opacity: .85; }
+    .tools { display: flex; gap: 8px; flex-wrap: wrap; }
+    .btn {
+      border: 1px solid rgba(255,255,255,.55); background: transparent; color: #fff;
+      padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; text-decoration: none;
+    }
+    .btn:hover { background: rgba(255,255,255,.12); }
+    .btn.solid { background: #fff; color: var(--navy); border-color: #fff; }
+    .btn.solid:hover { background: #E6ECF6; }
+
+    .canvas {
+      flex: 1; overflow: auto; cursor: grab;
+      background-color: var(--bg);
+      background-image: radial-gradient(var(--dot) 1.2px, transparent 1.3px);
+      background-size: 18px 18px;
+    }
+    .canvas.dragging { cursor: grabbing; user-select: none; }
+    .tree { display: inline-block; min-width: 100%; padding: 28px 24px 60px; }
+
+    /* ---- Cây: đường nối kiểu sơ đồ tổ chức ---- */
+    .tree ul {
+      display: flex; justify-content: center; align-items: flex-start;
+      margin: 0; padding: var(--gap) 0 0; position: relative; list-style: none;
+    }
+    .tree > ul { padding-top: 0; }
+    .tree li {
+      position: relative; padding: var(--gap) 6px 0;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .tree > ul > li { padding-top: 0; }
+    .tree li::before, .tree li::after {
+      content: ""; position: absolute; top: 0; right: 50%; width: 50%; height: var(--gap);
+      border-top: 2px solid var(--line);
+    }
+    .tree li::after { right: auto; left: 50%; border-left: 2px solid var(--line); }
+    .tree li:only-child::before, .tree li:only-child::after { display: none; }
+    .tree li:only-child { padding-top: 0; }
+    .tree li:first-child::before, .tree li:last-child::after { border: 0 none; }
+    .tree li:last-child::before { border-right: 2px solid var(--line); border-radius: 0 8px 0 0; }
+    .tree li:first-child::after { border-radius: 8px 0 0 0; }
+    .tree ul ul::before {
+      content: ""; position: absolute; top: 0; left: 50%; height: var(--gap);
+      border-left: 2px solid var(--line);
+    }
+    .tree > ul > li::before, .tree > ul > li::after { display: none; }
+
+    .tree ul.closed { display: none; }
+    .tree ul.opening { animation: drop .22s ease-out; }
+    @keyframes drop { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+
+    /* ---- Ô ---- */
+    .node {
+      position: relative; font-family: var(--font); text-align: center;
+      border: 0; margin: 0; padding: 0; background: none; color: inherit; font-size: inherit;
+    }
+    button.node { cursor: pointer; }
+    button.node:focus-visible { outline: 3px solid #F2B705; outline-offset: 3px; }
+
+    .lv1 {
+      background: var(--navy); color: #fff; font-weight: bold; font-size: 24px;
+      padding: 14px 40px; min-width: min(640px, 80vw); border-radius: 4px;
+      box-shadow: 0 3px 10px rgba(11,42,87,.25);
+    }
+    .lv2 {
+      background: #fff; border: 1.5px solid #444; border-radius: 8px;
+      font-weight: bold; font-size: 15px; padding: 8px 14px; width: 168px; line-height: 1.3;
+      box-shadow: 0 2px 6px rgba(0,0,0,.08);
+    }
+    .lv3 {
+      background: var(--unit); color: #fff; font-weight: bold; font-size: 14.5px;
+      width: 142px; min-height: 58px; padding: 8px 8px; line-height: 1.25;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 6px rgba(19,58,124,.25);
+    }
+    .lv4 {
+      background: #fff; border: 1.5px solid var(--box-border); border-radius: 3px;
+      font-size: 13px; color: #333; width: 142px; padding: 8px 8px; line-height: 1.4;
+    }
+    .list { width: 236px; text-align: left; }
+    .tree .list ul { display: block; padding: 0 0 0 18px; margin: 0; }
+    .tree .list ul::before { display: none; }
+    .tree .list li { display: list-item; list-style: disc; padding: 1px 0; }
+    .tree .list li::before, .list li::after { display: none; }
+
+    button.node:hover.lv2 { border-color: var(--navy); background: #F3F7FD; }
+    button.node:hover.lv3 { background: #1B4C9C; }
+    button.node:hover.lv4 { border-color: #7FA3D6; background: #F6F9FE; }
+
+    /* nút +/− dưới ô có tầng con */
+    .toggle {
+      position: absolute; left: 50%; bottom: -10px; transform: translateX(-50%);
+      width: 20px; height: 20px; border-radius: 50%;
+      background: #fff; border: 1.5px solid var(--line); color: var(--navy);
+      font: bold 14px/16px var(--ui); text-align: center; z-index: 2;
+    }
+    .node.open .toggle { background: var(--navy); border-color: var(--navy); color: #fff; }
+    .lv1 .toggle { display: none; }
+
+    .footnote { position: fixed; right: 16px; bottom: 12px; font-size: 12px; color: var(--muted);
+      background: rgba(255,255,255,.85); padding: 4px 8px; border-radius: 4px; }
+
+    @media (max-width: 640px) {
+      .topbar { padding: 10px 16px; }
+      .tree { padding: 20px 16px 60px; }
+      .lv1 { font-size: 20px; padding: 12px 20px; }
+      .footnote { display: none; }
+    }
+  </style>
 </head>
 <body>
   <header class="topbar">
-    <div>
-      <h1 id="title">Sơ đồ tương tác - Bộ Nội vụ</h1>
-      <div class="sub">Bấm vào một đơn vị để xem các mối quan hệ. Esc để bỏ chọn.</div>
-    </div>
-    <div class="top-actions">
-      <a class="badge link" href="co-cau.html">Sơ đồ cơ cấu tổ chức →</a>
-      <span class="badge">Dữ liệu: bản dự thảo</span>
+    <div class="hint">Bấm vào một ô để mở hoặc thu gọn tầng bên dưới.</div>
+    <div class="tools">
+      <button id="open-all" class="btn solid">Mở tất cả</button>
+      <button id="close-all" class="btn">Thu gọn</button>
+      <a class="btn" href="tuong-tac.html">Sơ đồ tương tác →</a>
     </div>
   </header>
 
-  <div class="layout">
-    <main class="canvas-wrap">
-      <div id="stage" class="stage">
-        <section class="tier" data-tier="bo">
-          <div class="tier-label">Bộ Nội vụ</div>
-          <div class="bo-box">
-            <div class="ldb-row" id="row-ldb"></div>
-            <div class="groups" id="groups"></div>
-          </div>
-        </section>
-        <section class="tier" data-tier="bottom">
-          <div class="tier-label">Địa phương</div>
-          <div class="tier-row" id="row-bottom"></div>
-        </section>
-        <svg id="edges" class="edges"></svg>
-      </div>
-    </main>
+  <main id="canvas" class="canvas">
+    <div id="tree" class="tree"></div>
+  </main>
+  <div class="footnote">Kéo chuột để di chuyển sơ đồ</div>
 
-    <aside class="side">
-      <div class="panel">
-        <input id="search" type="search" placeholder="Tìm đơn vị..." autocomplete="off">
-        <div id="search-results" class="search-results"></div>
-      </div>
+  <script src="co-cau-data.js"></script>
+  <script>
+  (function () {
+    "use strict";
+    const root = window.CO_CAU;
+    const treeEl = document.getElementById("tree");
+    const canvas = document.getElementById("canvas");
+    document.title = "Cơ cấu tổ chức - " + root.name;
 
-      <div class="panel">
-        <div class="panel-title">Loại quan hệ</div>
-        <div id="legend" class="legend"></div>
-        <div class="btn-row">
-          <button id="btn-all" class="btn">Hiện toàn bộ quan hệ</button>
-          <button id="btn-clear" class="btn ghost">Bỏ chọn</button>
-        </div>
-      </div>
+    function build(item, level) {
+      const li = document.createElement("li");
+      const hasKids = item.children && item.children.length > 0;
+      const node = document.createElement(hasKids ? "button" : "div");
+      node.className = "node lv" + Math.min(level, 4) + (item.items ? " list" : "");
 
-      <div class="panel">
-        <div class="panel-title">Quy trình</div>
-        <select id="process"></select>
-        <div id="process-box" class="process-box hidden">
-          <div class="btn-row">
-            <button id="p-prev" class="btn ghost">◀ Trước</button>
-            <button id="p-play" class="btn">▶ Tự chạy</button>
-            <button id="p-next" class="btn ghost">Tiếp ▶</button>
-          </div>
-          <ol id="steps" class="steps"></ol>
-        </div>
-      </div>
+      if (item.items) {
+        const ul = document.createElement("ul");
+        item.items.forEach((t) => { const i = document.createElement("li"); i.textContent = t; ul.appendChild(i); });
+        node.appendChild(ul);
+      } else {
+        const span = document.createElement("span");
+        span.textContent = item.name;
+        node.appendChild(span);
+      }
+      li.appendChild(node);
 
-      <div class="panel grow">
-        <div id="detail" class="detail"></div>
-      </div>
-    </aside>
-  </div>
+      if (hasKids) {
+        node.type = "button";
+        const tg = document.createElement("span");
+        tg.className = "toggle";
+        tg.setAttribute("aria-hidden", "true");
+        node.appendChild(tg);
 
-  <div id="tooltip" class="tooltip hidden"></div>
+        const ul = document.createElement("ul");
+        ul.className = "closed";
+        item.children.forEach((c) => ul.appendChild(build(c, level + 1)));
+        li.appendChild(ul);
+        setOpen(node, ul, false);
 
-  <script src="data.js"></script>
-  <script src="app.js"></script>
+        node.addEventListener("click", () => {
+          if (moved) return;
+          const open = !node.classList.contains("open");
+          if (open) {
+            setOpen(node, ul, true, true);
+            requestAnimationFrame(() => reveal(ul));
+          } else {
+            // thu gọn cả các tầng con bên dưới
+            li.querySelectorAll("button.node").forEach((b) => setOpen(b, b.nextElementSibling, false));
+          }
+        });
+      }
+      return li;
+    }
+
+    function setOpen(node, ul, open, animate) {
+      node.classList.toggle("open", open);
+      node.setAttribute("aria-expanded", String(open));
+      node.querySelector(".toggle").textContent = open ? "−" : "+";
+      ul.classList.toggle("closed", !open);
+      ul.classList.remove("opening");
+      if (open && animate) { void ul.offsetWidth; ul.classList.add("opening"); }
+    }
+
+    // cuộn để thấy tầng vừa mở
+    function reveal(ul) {
+      const c = canvas.getBoundingClientRect(), r = ul.getBoundingClientRect();
+      let dx = 0, dy = 0;
+      if (r.right > c.right - 16) dx = Math.min(r.right - c.right + 16, r.left - c.left - 16);
+      else if (r.left < c.left + 16) dx = r.left - c.left - 16;
+      if (r.bottom > c.bottom - 16) dy = Math.min(r.bottom - c.bottom + 16, r.top - c.top - 80);
+      if (dx || dy) canvas.scrollBy({ left: dx, top: dy, behavior: "smooth" });
+    }
+
+    const top = document.createElement("ul");
+    top.appendChild(build(root, 1));
+    treeEl.appendChild(top);
+    // mở sẵn tầng nhóm dưới "Bộ Nội vụ"
+    const rootBtn = treeEl.querySelector(".lv1");
+    setOpen(rootBtn, rootBtn.nextElementSibling, true);
+    canvas.scrollLeft = (canvas.scrollWidth - canvas.clientWidth) / 2;
+
+    document.getElementById("open-all").onclick = () =>
+      treeEl.querySelectorAll("button.node").forEach((b) => setOpen(b, b.nextElementSibling, true));
+    document.getElementById("close-all").onclick = () => {
+      treeEl.querySelectorAll("button.node").forEach((b) => setOpen(b, b.nextElementSibling, b === rootBtn));
+      canvas.scrollTo({ left: (canvas.scrollWidth - canvas.clientWidth) / 2, top: 0, behavior: "smooth" });
+    };
+
+    // kéo để di chuyển
+    let drag = null, moved = false;
+    canvas.addEventListener("pointerdown", (e) => {
+      if (e.pointerType !== "mouse" || e.button !== 0) return;
+      drag = { x: e.clientX, y: e.clientY, l: canvas.scrollLeft, t: canvas.scrollTop };
+      moved = false;
+    });
+    window.addEventListener("pointermove", (e) => {
+      if (!drag) return;
+      const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+      if (!moved && Math.abs(dx) + Math.abs(dy) < 5) return;
+      moved = true;
+      canvas.classList.add("dragging");
+      canvas.scrollLeft = drag.l - dx;
+      canvas.scrollTop = drag.t - dy;
+    });
+    window.addEventListener("pointerup", () => {
+      drag = null;
+      canvas.classList.remove("dragging");
+      setTimeout(() => (moved = false), 0);
+    });
+  })();
+  </script>
 </body>
 </html>

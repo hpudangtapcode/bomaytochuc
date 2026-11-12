@@ -38,7 +38,6 @@ button, input, select { font-family: inherit; font-size: 14px; }
 
 .node { position: relative; z-index: 2; font-family: var(--font); font-weight: bold; font-size: 14px; line-height: 1.25; color: #fff; background: var(--navy); border: 2px solid transparent; border-radius: 4px; padding: 8px 10px; text-align: center; cursor: pointer; transition: opacity .2s, transform .15s, box-shadow .2s; user-select: none; }
 .node:hover { transform: translateY(-1px); box-shadow: 0 3px 10px rgba(11,42,87,.25); }
-.node.g-tren { background: var(--top); min-width: 150px; }
 .node.g-dp { background: var(--dp); min-width: 150px; }
 .node.g-bo { background: #fff; color: var(--navy); border-color: var(--gold); min-width: 220px; font-size: 15px; }
 .node.selected { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,162,39,.45); }
@@ -90,3 +89,6 @@ button, input, select { font-family: inherit; font-size: 14px; }
 .rel .d { font-size: 13px; color: var(--muted); margin-top: 2px; }
 
 .tooltip { position: fixed; z-index: 10; max-width: 320px; background: var(--text); color: #fff; font-size: 13px; padding: 7px 10px; border-radius: 6px; pointer-events: none; line-height: 1.4; }
+.top-actions { display: flex; gap: 8px; align-items: center; }
+.badge.link { color: #fff; text-decoration: none; background: rgba(255,255,255,.12); }
+.badge.link:hover { background: rgba(255,255,255,.22); }

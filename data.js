@@ -20,7 +20,6 @@ window.DATA = {
   ],
 
   groups: [
-    { id: "tren", label: "Tầng trên",                     tier: "top" },
     { id: "bo",   label: "Lãnh đạo Bộ",                   tier: "bo" },
     { id: "tcns", label: "Tổ chức và nhân sự nhà nước",   tier: "bo" },
     { id: "xh",   label: "Quản lý các đối tượng xã hội",  tier: "bo" },
@@ -31,11 +30,6 @@ window.DATA = {
   ],
 
   nodes: [
-    { id: "tw",      name: "Trung ương Đảng",               group: "tren" },
-    { id: "qh",      name: "Quốc hội",                      group: "tren" },
-    { id: "cp",      name: "Chính phủ",                     group: "tren" },
-    { id: "ttg",     name: "Thủ tướng Chính phủ",           group: "tren" },
-    { id: "bonganh", name: "Các bộ, ngành",                 group: "tren" },
 
     { id: "ldb",     name: "Lãnh đạo Bộ",                   group: "bo" },
 
@@ -72,19 +66,6 @@ window.DATA = {
 
   // Quan hệ Lãnh đạo Bộ -> từng đơn vị thuộc Bộ được tạo tự động (xem app.js).
   relations: [
-    // ---- Tầng trên <-> Bộ
-    { from: "tw",  to: "ldb", type: "chidao",  note: "Lãnh đạo về tổ chức bộ máy, công tác cán bộ" },
-    { from: "qh",  to: "ldb", type: "kiemtra", note: "Giám sát, chất vấn; thông qua luật thuộc lĩnh vực" },
-    { from: "cp",  to: "ldb", type: "chidao",  note: "Giao nhiệm vụ; phê duyệt chương trình, đề án" },
-    { from: "ttg", to: "ldb", type: "chidao",  note: "Chỉ đạo, điều hành; giao nhiệm vụ đột xuất" },
-    { from: "ldb", to: "tw",  type: "baocao",  note: "Báo cáo về tổ chức bộ máy, biên chế khối nhà nước" },
-    { from: "ldb", to: "qh",  type: "baocao",  note: "Trình dự án luật; báo cáo giải trình" },
-    { from: "ldb", to: "cp",  type: "baocao",  note: "Trình dự thảo nghị định; báo cáo định kỳ" },
-    { from: "ldb", to: "ttg", type: "baocao",  note: "Trình quyết định; báo cáo kết quả thực hiện" },
-    { from: "vu_pc",   to: "bonganh", type: "phoihop", note: "Lấy ý kiến, thẩm định dự thảo văn bản" },
-    { from: "vu_tcbc", to: "bonganh", type: "kiemtra", note: "Thẩm định đề án tổ chức bộ máy, biên chế của bộ, ngành" },
-    { from: "vu_cchc", to: "bonganh", type: "kiemtra", note: "Theo dõi, đánh giá chỉ số cải cách hành chính" },
-
     // ---- Trong Bộ
     { from: "vu_tcbc", to: "vu_cqdp",  type: "phoihop", note: "Tổ chức, biên chế của chính quyền địa phương" },
     { from: "vu_tcbc", to: "vu_ccvc",  type: "phoihop", note: "Biên chế gắn với vị trí việc làm, tuyển dụng" },
@@ -144,13 +125,10 @@ window.DATA = {
       id: "vbqppl",
       name: "Xây dựng, ban hành nghị định (ví dụ: lĩnh vực công chức)",
       steps: [
-        { from: "cp",      to: "ldb",     type: "chidao",  note: "Giao Bộ chủ trì xây dựng nghị định" },
         { from: "ldb",     to: "vu_ccvc", type: "chidao",  note: "Giao đơn vị chủ trì soạn thảo" },
-        { from: "vu_ccvc", to: "bonganh", type: "phoihop", note: "Lấy ý kiến bộ, ngành, địa phương" },
         { from: "vu_ccvc", to: "vu_pc",   type: "phoihop", note: "Gửi hồ sơ đề nghị thẩm định nội bộ" },
         { from: "vu_pc",   to: "vu_ccvc", type: "kiemtra", note: "Ý kiến thẩm định" },
         { from: "vu_ccvc", to: "ldb",     type: "baocao",  note: "Hoàn thiện, trình Lãnh đạo Bộ" },
-        { from: "ldb",     to: "cp",      type: "baocao",  note: "Trình Chính phủ ban hành" },
         { from: "vu_ccvc", to: "dp_so",   type: "chidao",  note: "Hướng dẫn triển khai tại địa phương" }
       ]
     },
@@ -162,7 +140,6 @@ window.DATA = {
         { from: "dp_tinh", to: "vu_tcbc", type: "baocao",  note: "Đề nghị giao biên chế" },
         { from: "vu_tcbc", to: "vu_ccvc", type: "phoihop", note: "Đối chiếu vị trí việc làm" },
         { from: "vu_tcbc", to: "ldb",     type: "baocao",  note: "Trình phương án giao biên chế" },
-        { from: "ldb",     to: "ttg",     type: "baocao",  note: "Trình cấp có thẩm quyền quyết định" },
         { from: "vu_tcbc", to: "dp_tinh", type: "chidao",  note: "Thông báo, hướng dẫn thực hiện" }
       ]
     },
@@ -184,8 +161,6 @@ window.DATA = {
       steps: [
         { from: "dp_tinh", to: "ban_tdkt", type: "baocao", note: "Gửi hồ sơ đề nghị khen thưởng" },
         { from: "ban_tdkt", to: "ldb",     type: "baocao", note: "Thẩm định, trình Lãnh đạo Bộ" },
-        { from: "ldb",     to: "ttg",      type: "baocao", note: "Trình Thủ tướng Chính phủ" },
-        { from: "ttg",     to: "dp_tinh",  type: "chidao", note: "Quyết định khen thưởng" },
         { from: "ban_tdkt", to: "vp",      type: "phoihop", note: "Tổ chức trao tặng" }
       ]
     }

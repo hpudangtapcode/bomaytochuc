@@ -1,6 +1,8 @@
 # Sơ đồ tương tác - Bộ Nội vụ
 
-Trang web tĩnh thể hiện mối quan hệ tương tác giữa các đơn vị thuộc Bộ, giữa Bộ với tầng trên và với địa phương.
+Trang web tĩnh thể hiện mối quan hệ tương tác giữa các đơn vị thuộc Bộ, và giữa Bộ với địa phương.
+
+Trang `co-cau.html` là sơ đồ cơ cấu tổ chức dạng cây: bấm vào từng ô để mở tầng bên dưới. Dữ liệu nằm ở `co-cau-data.js`.
 
 ## Cấu trúc
 
@@ -10,6 +12,8 @@ Trang web tĩnh thể hiện mối quan hệ tương tác giữa các đơn vị
 | `style.css` | Giao diện |
 | `app.js` | Xử lý vẽ sơ đồ, chọn đơn vị, chạy quy trình |
 | `data.js` | **Toàn bộ dữ liệu: đơn vị, quan hệ, quy trình. Chỉ cần sửa file này.** |
+| `co-cau.html` | Sơ đồ cơ cấu tổ chức dạng cây, bấm để mở từng tầng |
+| `co-cau-data.js` | Dữ liệu cho sơ đồ cơ cấu tổ chức |
 
 ## Cập nhật dữ liệu (`data.js`)
 

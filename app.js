@@ -46,7 +46,6 @@
   function build() {
     $("#title").textContent = D.title;
     document.title = D.title;
-    D.nodes.filter((n) => G[n.group].tier === "top").forEach((n) => $("#row-top").appendChild(makeNode(n)));
     D.nodes.filter((n) => G[n.group].tier === "bottom").forEach((n) => $("#row-bottom").appendChild(makeNode(n)));
     D.nodes.filter((n) => n.group === "bo").forEach((n) => $("#row-ldb").appendChild(makeNode(n)));
     const groupsEl = $("#groups");

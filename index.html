@@ -24,9 +24,47 @@
 
   <!-- Thẻ 1: cơ cấu tổ chức dạng cây -->
   <section class="view" id="view-co-cau">
-    <div class="hint-bar">Bấm vào một ô để mở hoặc thu gọn tầng bên dưới. Kéo chuột để di chuyển sơ đồ.</div>
+    <div class="hint-bar">
+      <span>Bấm vào các ô của Bộ Nội vụ để mở hoặc thu gọn tầng bên dưới. Kéo chuột để di chuyển sơ đồ.</span>
+      <span class="map-legend"><i class="sw chidao"></i>Chỉ đạo, định hướng <i class="sw dexuat"></i>Đề nghị lên cấp trên <i class="sw thammuu"></i>Tham mưu, hướng dẫn</span>
+    </div>
     <main id="tree-canvas" class="tree-canvas">
-      <div id="tree" class="tree"></div>
+      <div class="map" id="map">
+        <svg class="map-edges" id="map-edges"></svg>
+        <div class="map-labels" id="map-labels"></div>
+
+        <!-- Khối Đảng -->
+        <section class="dang">
+          <div class="m-bar m-bch" id="m-bch"></div>
+          <div class="tctw">
+            <div class="tctw-units" id="m-tctw-units"></div>
+            <div class="tctw-row">
+              <div class="m-bar m-tctw" id="m-tctw"></div>
+              <div class="m-side" id="m-side"></div>
+            </div>
+          </div>
+          <div class="phan-cap">
+            <div class="pc-text pc-tw"><b>Trung ương</b><span id="m-pc-tw"></span></div>
+            <div class="pc-line"></div>
+            <div class="pc-text pc-dp"><b>Địa phương</b><span id="m-pc-dp"></span></div>
+          </div>
+          <div class="m-bar m-tinhuy" id="m-tinhuy"></div>
+          <div class="btctu-row">
+            <div class="m-light" id="m-btctu"></div>
+            <div class="m-note" id="m-btctu-note"></div>
+          </div>
+          <div class="btctu-children" id="m-btctu-children"></div>
+        </section>
+
+        <!-- Khối Nhà nước -->
+        <section class="nhanuoc">
+          <div class="m-cp" id="m-cp">
+            <div class="m-cp-label" id="m-cp-label"></div>
+            <div id="tree" class="tree"></div>
+          </div>
+          <div class="m-bar m-ubnd" id="m-ubnd"></div>
+        </section>
+      </div>
     </main>
   </section>
 
@@ -58,6 +96,7 @@
 
   <script src="co-cau-data.js"></script>
   <script src="co-cau.js"></script>
+  <script src="bao-quanh.js"></script>
   <script src="phoi-hop-data.js"></script>
   <script src="phoi-hop.js"></script>
   <script>

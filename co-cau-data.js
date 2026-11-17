@@ -156,3 +156,44 @@ window.CO_CAU = {
     }
   ]
 };
+
+/*
+ * KHỐI ĐẢNG VÀ KHỐI NHÀ NƯỚC bao quanh sơ đồ Bộ Nội vụ (thẻ "Cơ cấu tổ chức").
+ * Mũi tên cam = chỉ đạo, định hướng.
+ */
+window.BAO_QUANH = {
+  bch: "Tham mưu đến Ban Chấp hành Trung ương",
+  tctw: {
+    name: "Ban Tổ chức Trung ương",
+    units: [
+      { name: "Vụ Tổ chức - Điều lệ", desc: "Bộ máy, biên chế cơ quan Đảng, cơ cấu cán bộ" },
+      { name: "Vụ Cơ sở đảng, đảng viên", desc: "Dữ liệu Đảng viên, nghiệp vụ công tác Đảng" },
+      { name: "Vụ Cán bộ", desc: "Nhận hồ sơ phê duyệt danh sách người đứng đầu các địa phương. Tham mưu chiến lược bổ nhiệm, luân chuyển, bố trí cán bộ" },
+      { name: "Vụ Chính sách Cán bộ", desc: "Chế độ, tiền lương, khen thưởng bậc cao; cán bộ cao cấp, lão thành cách mạng" },
+      { name: "Các Vụ địa phương I, II, III", desc: "Quản lý theo các vùng, đi công tác các hội nghị của tỉnh, là đầu mối nhân sự Trung Ương" },
+      { name: "Vụ NCKH Tổ chức Cán bộ", desc: "Cung cấp NCKH về tổ chức bộ máy đảng, công tác đảng, cán bộ" },
+      { name: "Cục Đào tạo, bồi dưỡng cán bộ", desc: "Chỉ đạo kế hoạch tổ chức bồi dưỡng cho các cán bộ thuộc Đảng (lãnh đạo cấp cao, bí thư thành ủy,..)" },
+      { name: "Cục Bảo vệ chính trị nội bộ", desc: "Tham mưu công tác bảo vệ, tiếp nhận khiếu nại tố cáo, kiểm tra xác minh" },
+      { name: "Văn phòng Ban", desc: null }
+    ],
+    // mũi tên nhỏ bên phải thanh Ban Tổ chức Trung ương
+    side: { label: "Có văn bản hướng dẫn", name: "Đảng viên" }
+  },
+  // chữ hai bên đường phân cấp Trung ương / Địa phương
+  phanCap: {
+    trungUong: "Quy định, tiêu chuẩn, số tối đa, tổng biên chế nhân sự chủ chốt cấp tỉnh",
+    diaPhuong: "Nhân sự chủ chốt cấp xã, nhân sự trong bộ máy địa phương"
+  },
+  tinhUy: {
+    name: "Tỉnh ủy",
+    ban: "Ban tổ chức tỉnh ủy",
+    note: "Là cơ quan tham mưu, giúp việc tỉnh ủy những đầu mục tương tự BTCTW nhưng giới hạn ở cấp địa phương được ủy quyền",
+    children: ["Tổ chức cán bộ", "Tổ chức Đảng, Đảng viên", "Bảo vệ chính trị nội bộ", "Văn phòng"],
+    deNghi: "Đề nghị ký và cấp thẻ Đảng hằng tháng" // mũi tên từ Ban tổ chức tỉnh ủy lên Ban Tổ chức Trung ương
+  },
+  nhaNuoc: {
+    chinhPhu: "Bộ máy Chính phủ",
+    ubnd: "UBND, HĐND",
+    chiDao: "Chỉ đạo đường lối định hướng" // mũi tên Bộ Nội vụ → UBND, HĐND
+  }
+};

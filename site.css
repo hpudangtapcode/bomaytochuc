@@ -136,7 +136,8 @@ button.node:hover.lv4 { border-color: #7FA3D6; background: #F6F9FE; }
 
 .view { display: none; flex: 1; min-height: 0; flex-direction: column; }
 .view.active { display: flex; }
-.hint-bar { font-size: 13px; color: var(--muted); padding: 8px 24px; background: #fff; border-bottom: 1px solid #E3E8F0; }
+.hint-bar { font-size: 13px; color: var(--muted); padding: 8px 24px; background: #fff; border-bottom: 1px solid #E3E8F0;
+  display: flex; justify-content: space-between; gap: 6px 20px; flex-wrap: wrap; }
 
 /* ---- Thẻ Phối hợp ---- */
 :root {
@@ -242,3 +243,83 @@ button.node:hover.lv4 { border-color: #7FA3D6; background: #F6F9FE; }
   .tree { padding: 20px 16px 60px; }
   .lv1 { font-size: 20px; padding: 12px 20px; }
 }
+
+/* ---- Thẻ Cơ cấu: khối Đảng và khối Nhà nước bao quanh Bộ Nội vụ ---- */
+:root { --orange: #E8742C; --tm: #9DBCE6; }
+.map-legend { display: flex; align-items: center; gap: 6px 8px; flex-wrap: wrap; }
+.map-legend .sw { width: 26px; height: 0; border-top: 3px solid; border-radius: 0; margin-left: 8px; }
+.map-legend .sw.chidao { border-color: var(--orange); }
+.map-legend .sw.dexuat { border-color: var(--orange); border-top-style: dashed; }
+.map-legend .sw.thammuu { border-color: var(--tm); }
+
+.map {
+  position: relative; display: flex; flex-direction: column; align-items: center;
+  width: max-content; min-width: 100%; padding: 36px 240px 80px;
+}
+.map-edges { position: absolute; left: 0; top: 0; z-index: 0; pointer-events: none; overflow: visible; }
+.map-edges path { fill: none; }
+.map-labels { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.map-label {
+  position: absolute; transform: translate(-50%, -50%); white-space: nowrap;
+  font: 12px var(--ui); color: #A2470F; background: rgba(255,255,255,.95);
+  padding: 2px 7px; border-radius: 3px; border: 1px solid #F3C9A9;
+}
+.map-label.blue { color: var(--navy); border-color: var(--box-border); }
+.dang, .nhanuoc { position: relative; z-index: 1; }
+.dang { align-self: stretch; display: flex; flex-direction: column; align-items: center; }
+
+.m-bar {
+  background: var(--navy); color: #fff; font-family: var(--font); font-weight: bold; text-align: center;
+  padding: 12px 24px; box-shadow: 0 3px 10px rgba(11,42,87,.22);
+}
+.m-bch { font-size: 20px; text-transform: uppercase; min-width: 620px; margin-bottom: 64px; }
+.tctw { display: flex; flex-direction: column; }
+.tctw-units { display: flex; gap: 20px; align-items: flex-end; }
+.tctw-col { width: 148px; display: flex; flex-direction: column; gap: 14px; }
+.m-desc {
+  background: #fff; border: 1.5px solid var(--box-border); border-radius: 3px;
+  font: 12.5px/1.4 var(--font); color: #333; padding: 7px 8px;
+}
+.m-unit {
+  background: var(--unit); color: #fff; font: bold 13.5px/1.25 var(--font); text-align: center;
+  min-height: 56px; padding: 6px; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 6px rgba(19,58,124,.25);
+}
+.tctw-row { position: relative; margin-top: 16px; }
+.m-tctw { font-size: 18px; }
+.m-side {
+  position: absolute; left: calc(100% + 150px); top: 50%; transform: translateY(-50%);
+  background: #fff; border: 1.5px solid var(--box-border); font: 600 14px var(--font); color: var(--navy);
+  padding: 10px 22px; white-space: nowrap;
+}
+
+.phan-cap { align-self: stretch; margin: 44px 0 30px; font-family: var(--font); color: var(--navy); }
+.pc-text { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; padding: 0 8px; }
+.pc-text b { background: var(--bg); padding: 0 4px; font: bold 12px var(--ui); letter-spacing: .08em; text-transform: uppercase; color: var(--orange); }
+.pc-text span { font-size: 17px; text-align: right; max-width: 460px; }
+.pc-line { border-top: 2px dashed var(--orange); margin: 8px 0; opacity: .8; }
+
+.m-tinhuy { min-width: 380px; font-size: 17px; }
+.btctu-row { position: relative; margin-top: 30px; }
+.m-light {
+  background: #C9DBF5; color: var(--navy); font: bold 16px var(--font); text-align: center;
+  padding: 12px 24px; min-width: 380px;
+}
+.m-note {
+  position: absolute; left: calc(100% + 22px); top: 50%; transform: translateY(-50%); width: 360px;
+  background: #fff; border: 1px solid var(--navy); font: 13.5px/1.4 var(--font); text-align: center; padding: 6px 10px;
+}
+.btctu-children { display: flex; gap: 22px; margin-top: 56px; }
+.m-child {
+  background: #E3EDFB; color: var(--navy); font: 600 15px var(--font); text-align: center;
+  padding: 12px 18px; min-width: 190px;
+}
+
+.nhanuoc { display: flex; align-items: flex-start; gap: 240px; margin-top: 110px; }
+.m-cp {
+  position: relative; background: rgba(201,219,245,.28); border: 1.5px solid #9DB6DA; border-radius: 12px;
+  padding: 36px 8px 8px;
+}
+.m-cp-label { position: absolute; left: 16px; top: 9px; font: bold 15px var(--font); color: var(--navy); }
+.m-cp .tree { padding: 28px 24px 40px; }
+.m-ubnd { margin-top: 64px; min-width: 300px; font-size: 18px; padding: 15px 24px; }

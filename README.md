@@ -1,37 +1,25 @@
-# Sơ đồ tương tác - Bộ Nội vụ
+# Bộ máy tổ chức - Bộ Nội vụ
 
-Trang web tĩnh thể hiện mối quan hệ tương tác giữa các đơn vị thuộc Bộ, và giữa Bộ với địa phương.
+Trang web tĩnh gồm hai thẻ:
 
-Trang chính (`index.html`) là sơ đồ cơ cấu tổ chức dạng cây: bấm vào từng ô để mở tầng bên dưới. Dữ liệu nằm ở `co-cau-data.js`.
+- **Cơ cấu tổ chức**: sơ đồ cây, bấm vào từng ô để mở tầng bên dưới.
+- **Phối hợp**: bấm vào một đơn vị để thấy mũi tên chỉ tới các đơn vị khác trong Bộ, tới khối *Địa phương / Cấp dưới* và khối *Cơ quan bộ ngang hàng*, kèm nội dung phối hợp; các ô không liên quan được làm mờ. Bấm vào một trong hai khối để xem mọi đơn vị có quan hệ với khối đó.
+
+Mở thẳng một thẻ bằng đường dẫn `.../#co-cau` hoặc `.../#phoi-hop`.
 
 ## Cấu trúc
 
 | File | Nội dung |
 |---|---|
-| `index.html` | Trang chính: sơ đồ cơ cấu tổ chức dạng cây, bấm để mở từng tầng |
-| `tuong-tac.html` | Khung trang sơ đồ tương tác |
-| `style.css` | Giao diện |
-| `app.js` | Xử lý vẽ sơ đồ, chọn đơn vị, chạy quy trình |
-| `data.js` | Dữ liệu sơ đồ tương tác: đơn vị, quan hệ, quy trình |
-| `co-cau-data.js` | Dữ liệu cho sơ đồ cơ cấu tổ chức |
+| `index.html` | Khung trang, hai thẻ |
+| `site.css` | Giao diện |
+| `co-cau-data.js` | **Dữ liệu sơ đồ cây** |
+| `co-cau.js` | Vẽ sơ đồ cây |
+| `phoi-hop-data.js` | **Dữ liệu phối hợp** (lấy từ "Bảng phối hợp các đơn vị thuộc Bộ Nội vụ") |
+| `phoi-hop.js` | Vẽ mũi tên phối hợp |
 
-## Cập nhật dữ liệu (`data.js`)
+Thường chỉ cần sửa hai file dữ liệu. Hướng dẫn chi tiết nằm ở đầu mỗi file.
 
-- Thêm đơn vị: thêm một dòng vào `nodes`, ví dụ `{ id: "vu_moi", name: "Vụ Mới", group: "gv" }`.
-- Thêm quan hệ: thêm một dòng vào `relations`, ví dụ
-  `{ from: "vu_pc", to: "vu_moi", type: "kiemtra", note: "Thẩm định văn bản" }`.
-  Loại quan hệ (`type`): `chidao`, `baocao`, `phoihop`, `dulieu`, `kiemtra`.
-- Thêm quy trình: thêm một mục vào `processes`, mỗi bước có `from`, `to`, `type`, `note`.
-- Quan hệ "Lãnh đạo Bộ → từng đơn vị" được tạo tự động, không cần khai báo.
-- Quan hệ khai báo sai mã đơn vị sẽ bị bỏ qua và báo trong Console của trình duyệt (F12).
+## Xem trang
 
-## Đưa lên GitHub Pages
-
-1. Tạo repository mới trên GitHub (ví dụ `so-do-bnv`), chọn Public.
-2. Bấm **Add file → Upload files**, kéo thả toàn bộ file trong thư mục này, bấm **Commit changes**.
-3. Vào **Settings → Pages**, mục *Source* chọn **Deploy from a branch**, nhánh `main`, thư mục `/ (root)`, bấm **Save**.
-4. Sau khoảng 1-2 phút, trang chạy tại `https://<tên-tài-khoản>.github.io/so-do-bnv/`.
-
-Có thể mở thẳng `index.html` trên máy để xem trước, không cần cài đặt.
-
-Đường dẫn có thể trỏ thẳng tới một đơn vị, ví dụ `.../tuong-tac.html#vu_tcbc`.
+Trang chạy trên GitHub Pages của kho này. Có thể mở thẳng `index.html` trên máy để xem trước, không cần cài đặt.

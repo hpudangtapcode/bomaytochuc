@@ -11,13 +11,52 @@
   // ---- Dựng ô
   const div = (cls, text) => { const d = document.createElement("div"); d.className = cls; d.textContent = text; return d; };
   $("m-bch").textContent = D.bch;
+  // Ban Tổ chức TW: bấm thanh để đóng/mở các vụ, cục; bấm từng vụ, cục để đóng/mở mô tả (giống Bộ Nội vụ)
+  const toggles = []; // { btn, target }
+  function setOpen(t, open, animate) {
+    t.btn.classList.toggle("open", open);
+    t.btn.setAttribute("aria-expanded", String(open));
+    t.btn.querySelector(".toggle").textContent = open ? "−" : "+";
+    t.target.classList.toggle("closed", !open);
+    t.target.classList.remove("opening");
+    if (open && animate) { void t.target.offsetWidth; t.target.classList.add("opening"); }
+  }
+  function makeToggle(btn, target, open) {
+    const tg = document.createElement("span");
+    tg.className = "toggle top";
+    tg.setAttribute("aria-hidden", "true");
+    btn.appendChild(tg);
+    const t = { btn, target };
+    toggles.push(t);
+    setOpen(t, open);
+    btn.addEventListener("click", () => {
+      if (window.coCauMoved && window.coCauMoved()) return; // vừa kéo sơ đồ, không phải bấm
+      const now = !btn.classList.contains("open");
+      setOpen(t, now, true);
+      if (!now && target.id === "m-tctw-units") unitToggles().forEach((u) => setOpen(u, false));
+    });
+    return t;
+  }
+  const unitToggles = () => toggles.filter((t) => t.btn.classList.contains("m-unit"));
+
   D.tctw.units.forEach((u) => {
     const col = div("tctw-col", "");
-    if (u.desc) col.appendChild(div("m-desc", u.desc));
-    col.appendChild(div("m-unit", u.name));
+    const btn = document.createElement(u.desc ? "button" : "div");
+    btn.className = "m-unit";
+    btn.textContent = u.name;
+    if (u.desc) {
+      btn.type = "button";
+      const d = div("m-desc", u.desc);
+      col.appendChild(d);
+      col.appendChild(btn);
+      makeToggle(btn, d, false);
+    } else col.appendChild(btn);
     $("m-tctw-units").appendChild(col);
   });
   $("m-tctw").textContent = D.tctw.name;
+  makeToggle($("m-tctw"), $("m-tctw-units"), true);
+  $("open-all").addEventListener("click", () => toggles.forEach((t) => setOpen(t, true)));
+  $("close-all").addEventListener("click", () => toggles.forEach((t) => setOpen(t, t.btn.id === "m-tctw")));
   $("m-side").textContent = D.tctw.side.name;
   $("m-pc-tw").textContent = D.phanCap.trungUong;
   $("m-pc-dp").textContent = D.phanCap.diaPhuong;
@@ -88,8 +127,12 @@
 
     // các vụ, cục của Ban Tổ chức TW tham mưu lên Ban Chấp hành TW
     const cols = [...$("m-tctw-units").children];
-    cols.forEach((c, i) => {
-      const top = box(c.firstElementChild);
+    if ($("m-tctw-units").classList.contains("closed")) {
+      // đang thu gọn: Ban Tổ chức TW tham mưu thẳng lên Ban Chấp hành
+      line([P(tctw.x + tctw.w * 0.3, tctw.y), P(tctw.x + tctw.w * 0.3, bch.b + 1)], "thammuu");
+    } else cols.forEach((c, i) => {
+      const first = [...c.children].find((el) => !el.classList.contains("closed"));
+      const top = box(first);
       const t = P(bch.x + bch.w * (0.12 + 0.76 * (cols.length > 1 ? i / (cols.length - 1) : 0.5)), bch.b + 1);
       line([P(top.cx, top.y), t], "thammuu");
     });
@@ -107,8 +150,10 @@
     });
     // Ban tổ chức tỉnh ủy → Ban Tổ chức TW: đề nghị
     {
-      const s = P(btctu.x, btctu.cy), t = P(tctw.x + tctw.w * 0.18, tctw.b + 2);
-      line([s, P(s.x - 160, s.y), P(t.x, t.y + 140), t], "dexuat", D.tinhUy.deNghi);
+      const s = P(btctu.x, btctu.cy);
+      const t = P(tctw.w > 600 ? tctw.x + tctw.w * 0.18 : tctw.x + 24, tctw.b + 2);
+      const lx = Math.min(s.x, t.x) - 160;
+      line([s, P(lx, s.y), P(lx, t.y + 120), t], "dexuat", D.tinhUy.deNghi);
     }
 
     // Ban Chấp hành TW → Bộ máy Chính phủ (vòng bên trái)

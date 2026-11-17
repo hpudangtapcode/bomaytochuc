@@ -92,6 +92,7 @@
 
     // kéo để di chuyển
     let drag = null, moved = false;
+    window.coCauMoved = () => moved; // khối bao quanh dùng để bỏ qua cú bấm sau khi kéo
     canvas.addEventListener("pointerdown", (e) => {
       if (e.pointerType !== "mouse" || e.button !== 0) return;
       drag = { x: e.clientX, y: e.clientY, l: canvas.scrollLeft, t: canvas.scrollTop };

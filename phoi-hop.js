@@ -18,7 +18,8 @@
   const EDGES = [];
   Object.entries(U).forEach(([id, u]) => {
     (u.noiBo || []).forEach((r) => {
-      if (!r.to) return;
+      // không ghi đơn vị cụ thể = dịch vụ chung, nối tới cả ô Bộ Nội vụ
+      if (!r.to) { EDGES.push({ from: id, to: "bo", type: "noibo", text: r.text, chung: true }); return; }
       if (!U[r.to]) { console.warn("Không có đơn vị:", r.to); return; }
       EDGES.push({ from: id, to: r.to, type: "noibo", text: r.text });
     });
@@ -29,7 +30,7 @@
   // ---- Chữ: *nghiêng* = nội dung bổ sung
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const rich = (s) => esc(s).replace(/\*([^*]+)\*/g, "<em>$1</em>");
-  const nameOf = (id) => (U[id] ? U[id].name : EXT[id].name);
+  const nameOf = (id) => (U[id] ? U[id].name : id === "bo" ? "Tất cả đơn vị trong Bộ" : EXT[id].name);
 
   // ---- Dựng ô
   const EL = { dp: $("ph-dp"), ngang: $("ph-ngang") };
@@ -54,6 +55,7 @@
   });
   Object.entries(EL).forEach(([id, el]) =>
     el.addEventListener("click", (e) => { e.stopPropagation(); select(sel === id ? null : id); }));
+  EL.bo = stage.querySelector(".ph-bo-title"); // đích của mũi tên "chung", không bấm được
   $("ph-canvas").addEventListener("click", () => sel && select(null));
   $("ph-clear").addEventListener("click", () => select(null));
   document.addEventListener("keydown", (e) => {
@@ -122,7 +124,9 @@
   function defs() {
     return `<defs>${Object.entries(COLOR).map(([k, c]) =>
       `<marker id="ah-${k}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-        <path d="M0,0 L10,5 L0,10 z" fill="${c}"/></marker>`).join("")}</defs>`;
+        <path d="M0,0 L10,5 L0,10 z" fill="${c}"/></marker>`).join("")}
+      <marker id="ah-fan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="${COLOR.noibo}"/></marker></defs>`;
   }
 
   let cleanup = [];
@@ -141,11 +145,27 @@
     const list = EDGES.filter((e) => e.from === sel || e.to === sel);
     EL[sel].classList.add("sel");
     list.forEach((e) => { EL[e.from].classList.add("rel"); EL[e.to].classList.add("rel"); });
+    stage.querySelectorAll(".ph-group-title").forEach((t) => t.classList.remove("rel"));
+    if (list.some((e) => e.chung)) {
+      // dịch vụ chung: mọi đơn vị trong Bộ đều liên quan
+      Object.keys(U).forEach((id) => EL[id].classList.add("rel"));
+      stage.querySelectorAll(".ph-group-title").forEach((t) => t.classList.add("rel"));
+    }
 
     const boBox = box(stage.querySelector(".ph-bo"));
     const placed = [];
     list.forEach((e) => {
-      const g = geometry(e, boBox), c = COLOR[e.type];
+      if (e.chung) { fanOut(e.from); }
+      const g = e.chung ? null : geometry(e, boBox), c = COLOR[e.type];
+      if (e.chung) {
+        const lab = document.createElement("div");
+        lab.className = "ph-label" + (isExt ? " hidden" : "");
+        lab.style.setProperty("--c", c);
+        lab.innerHTML = (isExt ? `<b>${esc(nameOf(e.from))}:</b> ` : "") + rich(e.text);
+        labels.appendChild(lab);
+        if (!isExt) placeFree(lab, e);
+        return;
+      }
       const d = `M${g.p[0].x},${g.p[0].y} C${g.p[1].x},${g.p[1].y} ${g.p[2].x},${g.p[2].y} ${g.p[3].x},${g.p[3].y}`;
       const path = document.createElementNS(SVGNS, "path");
       path.setAttribute("d", d);
@@ -192,6 +212,54 @@
     });
   }
 
+  // dịch vụ chung: mũi tên mảnh từ đơn vị tới từng đơn vị khác trong Bộ
+  function edgePoint(B, toward) {
+    const dx = toward.x - B.cx, dy = toward.y - B.cy;
+    const k = Math.min(Math.abs(B.w / 2 / (dx || 1e-9)), Math.abs(B.h / 2 / (dy || 1e-9)));
+    return { x: B.cx + dx * k, y: B.cy + dy * k };
+  }
+  function fanOut(from) {
+    const A = box(EL[from]);
+    Object.keys(U).forEach((id) => {
+      if (id === from) return;
+      const B = box(EL[id]);
+      const s = edgePoint(A, { x: B.cx, y: B.cy }), t = edgePoint(B, { x: A.cx, y: A.cy });
+      const path = document.createElementNS(SVGNS, "path");
+      path.setAttribute("d", `M${s.x},${s.y} L${t.x},${t.y}`);
+      path.setAttribute("class", "fan");
+      path.setAttribute("stroke", COLOR.noibo);
+      path.setAttribute("marker-end", "url(#ah-fan)");
+      svg.appendChild(path);
+    });
+  }
+
+  // nhãn của dịch vụ chung: đặt vào khoảng trống gần nhất trong ô Bộ, nối bằng nét đứt
+  function placeFree(lab, e) {
+    const A = box(EL[e.from]), bo = box(stage.querySelector(".ph-bo"));
+    const cols = [...$("ph-groups").children].map(box);
+    lab.style.width = cols[0].w + "px";
+    lab.style.maxWidth = "none";
+    const h = lab.offsetHeight;
+    const fit = cols.filter((c) => bo.b - 12 - (c.b + 12) >= h)
+      .sort((a, b) => Math.abs(a.cx - A.cx) - Math.abs(b.cx - A.cx))[0];
+    let x, y;
+    if (fit) { x = fit.x; y = fit.b + 12; }
+    else { lab.style.width = "220px"; x = clamp(A.cx - 110, 4, stage.scrollWidth - 224); y = bo.b + 12; }
+    lab.style.left = x + "px";
+    lab.style.top = y + "px";
+    const L = { x, y, r: x + lab.offsetWidth, b: y + lab.offsetHeight };
+    const lcx = (L.x + L.r) / 2, lcy = (L.y + L.b) / 2;
+    const p1 = { x: clamp(lcx, A.x, A.r), y: clamp(lcy, A.y, A.b) };
+    const p2 = { x: clamp(A.cx, L.x, L.r), y: clamp(A.cy, L.y, L.b) };
+    const line = document.createElementNS(SVGNS, "path");
+    line.setAttribute("d", `M${p1.x},${p1.y} L${p2.x},${p2.y}`);
+    line.setAttribute("stroke", COLOR.noibo);
+    line.setAttribute("stroke-dasharray", "4 4");
+    line.setAttribute("style", "stroke-width:1.5");
+    svg.appendChild(line);
+    lab.insertAdjacentHTML("afterbegin", "<b>Chung cho cả Bộ:</b> ");
+  }
+
   function place(lab, g) {
     const w = lab.offsetWidth, h = lab.offsetHeight;
     let x = g.lx - w / 2, y = g.anchor === "bottom" ? g.ly - h : g.ly - h / 2;
@@ -220,7 +288,7 @@
       const sec = (type, html) => `<h3 style="--c:${COLOR[type] || "#5B667A"}">${TITLE[type] || type}</h3>${html}`;
       const none = `<p class="muted">Không có.</p>`;
       const inner = (u.noiBo || []).map((r) =>
-        `<li>${r.to ? `→ <a href="#" class="link" data-go="${r.to}">${esc(U[r.to].name)}</a>: ` : "Chung trong Bộ: "}${rich(r.text)}</li>`);
+        `<li>${r.to ? `→ <a href="#" class="link" data-go="${r.to}">${esc(U[r.to].name)}</a>: ` : "→ Tất cả đơn vị trong Bộ: "}${rich(r.text)}</li>`);
       const incoming = EDGES.filter((e) => e.type === "noibo" && e.to === sel).map((e) =>
         `<li>← <a href="#" class="link" data-go="${e.from}">${esc(U[e.from].name)}</a>: ${rich(e.text)}</li>`);
       detail.innerHTML = `<h2>${esc(u.name)}</h2>` +

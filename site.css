@@ -200,6 +200,7 @@ button.node:hover.lv4 { border-color: #7FA3D6; background: #F6F9FE; }
 .ph-edges, .ph-labels { position: absolute; left: 0; top: 0; pointer-events: none; }
 .ph-edges { overflow: visible; z-index: 1; }
 .ph-edges path { fill: none; stroke-width: 2.4; }
+.ph-edges path.fan { stroke-width: 1.3; opacity: .55; }
 .ph-edges path.hit { stroke: transparent; stroke-width: 14; pointer-events: stroke; cursor: help; }
 .ph-labels { z-index: 4; width: 100%; height: 100%; }
 .ph-label {

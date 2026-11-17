@@ -4,7 +4,7 @@
  * Nguồn: "Bảng phối hợp các đơn vị thuộc Bộ Nội vụ".
  * Mỗi đơn vị:
  *   noiBo    : danh sách { to: <id đơn vị nhận>, text } — vẽ mũi tên trong Bộ.
- *              to: null = phối hợp chung với cả Bộ (không vẽ mũi tên, chỉ hiện ở khung chi tiết).
+ *              to: null = dịch vụ chung của cả Bộ: mũi tên tới ô "Bộ Nội vụ", chữ đặt ở chỗ trống.
  *   diaPhuong: mũi tên sang khối "Địa phương / Cấp dưới".
  *   ngang    : mũi tên sang khối "Cơ quan bộ ngang hàng".
  *   capTren  : chỉ hiện ở khung chi tiết, không vẽ.

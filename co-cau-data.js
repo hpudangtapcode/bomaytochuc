@@ -212,27 +212,27 @@ window.BAO_QUANH = {
  */
 window.DOI_CHIEU = {
   title: "Đối chiếu với doanh nghiệp mô hình tương tự",
-  W: 1460, H: 1130,
+  W: 1460, H: 1200,
   boxes: [
     { id: "ctdh",     label: "CTĐH",               x: 300, y: 30,  w: 340, h: 64 },
     { id: "thammuu",  label: "Các ban tham mưu",   x: 560, y: 170, w: 330, h: 66 },
     { id: "uyquyen",  label: "Ủy quyền điều hành", x: 20,  y: 330, w: 340, h: 66 },
     { id: "chucnang", label: "Các ban chức năng",  x: 620, y: 336, w: 240, h: 54 },
-    { id: "cttv1",    label: "CTTV",               x: 485, y: 600, w: 150, h: 50 },
-    { id: "cttv2",    label: "CTTV",               x: 825, y: 600, w: 150, h: 50 },
-    { id: "dm1",      label: "Đầu mối đối ứng",    x: 440, y: 710, w: 240, h: 50 },
-    { id: "dm2",      label: "Đầu mối đối ứng",    x: 780, y: 780, w: 240, h: 50 }
+    { id: "cttv1",    label: "CTTV",               x: 485, y: 830, w: 150, h: 50 },
+    { id: "cttv2",    label: "CTTV",               x: 825, y: 830, w: 150, h: 50 },
+    { id: "dm1",      label: "Đầu mối đối ứng",    x: 440, y: 950, w: 240, h: 50 },
+    { id: "dm2",      label: "Đầu mối đối ứng",    x: 780, y: 1030, w: 240, h: 50 }
   ],
   edges: [
     { color: "do",   points: [[725, 170], [725, 122], [505, 122], [505, 96]] },
     { color: "vang", points: [[470, 94], [470, 140], [190, 140], [190, 328]] },
     { color: "vang", points: [[470, 140], [470, 306], [740, 306], [740, 334]] },
     { color: "vang", points: [[360, 363], [618, 363]], label: "chỉ đạo", at: [490, 352] },
-    { color: "vang", points: [[330, 396], [530, 598]], label: "chỉ đạo", at: [398, 512] },
-    { color: "xam",  points: [[740, 390], [740, 420], [560, 420], [560, 598]] },
-    { color: "xam",  points: [[740, 420], [900, 420], [900, 598]], label: "hướng dẫn, quy định", at: [740, 446] },
-    { color: "xam",  points: [[560, 650], [560, 708]] },
-    { color: "xam",  points: [[900, 650], [900, 778]] }
+    { color: "vang", points: [[330, 396], [530, 828]], label: "chỉ đạo", at: [392, 600] },
+    { color: "xam",  points: [[740, 390], [740, 420], [560, 420], [560, 828]] },
+    { color: "xam",  points: [[740, 420], [900, 420], [900, 828]], label: "hướng dẫn, quy định", at: [740, 446] },
+    { color: "xam",  points: [[560, 880], [560, 948]] },
+    { color: "xam",  points: [[900, 880], [900, 1028]] }
   ],
   labels: [
     { text: "hướng dẫn tất cả đối tượng liên quan", at: [725, 266] }
@@ -258,7 +258,13 @@ window.DOI_CHIEU = {
     },
     {
       no: 2, x: 590, y: 462, w: 300, link: null,
-      text: "Mỗi bên ban hành quy tắc thuộc chuyên môn của mình, gồm quy tắc trong chỉ đạo và quy tắc trong thi hành"
+      text: "Mỗi bên ban hành quy tắc thuộc chuyên môn của mình, gồm quy tắc trong chỉ đạo và quy tắc trong thi hành",
+      loi: [
+        "Lấy đó làm quy chuẩn, tiêu chuẩn khi kiểm chứng lại chi tiết các vận hành, thống nhất cách hiểu"
+      ],
+      hai: [
+        "Ban hành quá nhiều văn bản hướng dẫn trong khi thực tế vận hành theo kinh nghiệm, hoặc hướng dẫn không sát thực tế do thiếu chuyên môn"
+      ]
     },
     {
       no: 3, x: 20, y: 690, w: 400, link: [[150, 396], [150, 690]],

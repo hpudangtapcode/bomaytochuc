@@ -240,9 +240,8 @@ window.DOI_CHIEU = {
   notes: [
     {
       no: 1, x: 1010, y: 20, w: 440, link: [[890, 203], [1010, 203]],
-      title: "Các ban tham mưu",
+      title: "Tách bạch chức năng tham mưu với chức năng quyết định, thi hành",
       points: [
-        "Tách bạch chức năng tham mưu với chức năng quyết định, thi hành",
         "Có thẩm quyền thu thập dữ liệu quá khứ, dữ liệu thi hành và yêu cầu cập nhật dữ liệu",
         "Có cơ quan chuyên trách cung cấp nền tảng học thuật, phối hợp với các đơn vị nghiên cứu của các trường đại học",
         "Thực hiện các báo cáo sơ kết, tổng kết"

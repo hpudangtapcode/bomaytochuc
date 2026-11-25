@@ -190,7 +190,9 @@
       // Bộ Nội vụ → UBND, HĐND và → Sở Nội vụ (đường tới UBND đi vòng ngoài, không cắt nhau)
       {
         const s = P(root.r - 130, root.y), t = P(ubnd.x - 2, ubnd.cy);
-        line([s, P(s.x, s.y - 140), P(t.x - 170, t.y), t], "chidao", D.nhaNuoc.bnvToUbnd);
+        const p = [s, P(s.x, s.y - 140), P(t.x - 170, t.y), t];
+        p.mid = bez(p, 0.22); // nhãn đặt thấp, tránh ô Văn phòng của Ban tổ chức tỉnh ủy
+        line(p, "chidao", D.nhaNuoc.bnvToUbnd);
       }
       {
         const s = P(root.r - 50, root.y), t = P(snv.x - 2, snv.cy);

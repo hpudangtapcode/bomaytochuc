@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Bộ máy tổ chức chính trị - BNV & BTCTW</title>
-  <link rel="stylesheet" href="site.css?v=202611250627">
+  <link rel="stylesheet" href="site.css?v=202611250700">
 </head>
 <body>
   <header class="topbar">
     <nav class="tabs" role="tablist">
-      <button class="tab" role="tab" data-view="co-cau">Bộ máy tổ chức chính trị - BNV &amp; BTCTW</button>
-      <button class="tab" role="tab" data-view="phoi-hop">Phối hợp trong nội bộ BNV</button>
+      <button class="tab" role="tab" data-view="co-cau"><span class="long">Bộ máy tổ chức chính trị - BNV &amp; BTCTW</span><span class="short">Bộ máy tổ chức</span></button>
+      <button class="tab" role="tab" data-view="phoi-hop"><span class="long">Phối hợp trong nội bộ BNV</span><span class="short">Phối hợp nội bộ</span></button>
     </nav>
     <div class="tools" data-for="co-cau">
       <button id="open-all" class="btn solid">Mở tất cả</button>
@@ -24,13 +24,14 @@
   <!-- Thẻ 1: cơ cấu tổ chức dạng cây -->
   <section class="view" id="view-co-cau">
     <div class="hint-bar">
-      <span>Bấm vào các ô của Bộ Nội vụ để mở hoặc thu gọn tầng bên dưới. Kéo chuột để di chuyển sơ đồ.</span>
-      <span class="map-legend"><i class="sw chidao"></i>Chỉ đạo, định hướng <i class="sw dexuat"></i>Đề nghị lên cấp trên <i class="sw thammuu"></i>Tham mưu, hướng dẫn</span>
+      <span class="long">Bấm vào các ô của Bộ Nội vụ để mở hoặc thu gọn tầng bên dưới. Kéo chuột để di chuyển sơ đồ, Ctrl + lăn chuột để phóng to.</span>
+      <span class="short">Chạm ô để mở/thu gọn. Chụm hai ngón để phóng to, thu nhỏ.</span>
+      <span class="map-legend"><span><i class="sw chidao"></i>Chỉ đạo, định hướng</span> <span><i class="sw dexuat"></i>Đề nghị lên cấp trên</span> <span><i class="sw thammuu"></i>Tham mưu, hướng dẫn</span></span>
     </div>
     <button type="button" class="dc-toggle" id="dc-toggle" aria-controls="doichieu" aria-expanded="false">
       <span class="dc-toggle-icon" aria-hidden="true">⇆</span>
       <span class="dc-toggle-text">
-        <b>Đối chiếu với doanh nghiệp mô hình tương tự</b>
+        <b><span class="long">Đối chiếu với doanh nghiệp mô hình tương tự</span><span class="short">Đối chiếu doanh nghiệp</span></b>
         <small>Bấm để mở</small>
       </span>
     </button>
@@ -116,22 +117,32 @@
     </div>
   </section>
 
-  <script src="co-cau-data.js?v=202611250627"></script>
-  <script src="co-cau.js?v=202611250627"></script>
-  <script src="doi-chieu.js?v=202611250627"></script>
-  <script src="bao-quanh.js?v=202611250627"></script>
-  <script src="phoi-hop-data.js?v=202611250627"></script>
-  <script src="phoi-hop.js?v=202611250627"></script>
+  <script src="zoom.js?v=202611250700"></script>
+  <script src="co-cau-data.js?v=202611250700"></script>
+  <script src="co-cau.js?v=202611250700"></script>
+  <script src="doi-chieu.js?v=202611250700"></script>
+  <script src="bao-quanh.js?v=202611250700"></script>
+  <script src="phoi-hop-data.js?v=202611250700"></script>
+  <script src="phoi-hop.js?v=202611250700"></script>
   <script>
   (function () {
     "use strict";
     const views = ["co-cau", "phoi-hop"];
+    // phóng to / thu nhỏ; trên điện thoại mở sẵn ở cỡ nhỏ để thấy toàn cảnh
+    const small = window.innerWidth < 760;
+    const zc = makeZoom({ canvas: document.getElementById("tree-canvas"), content: document.querySelector(".map-wrap"), initial: small ? 0.42 : 1 });
+    const zp = makeZoom({ canvas: document.getElementById("ph-canvas"), content: document.getElementById("ph-stage") });
+    zoomButtons(document.querySelector('.tools[data-for="co-cau"]'), zc);
+    zoomButtons(document.querySelector('.tools[data-for="phoi-hop"]'), zp);
+    let phFitted = !small;
     function show(v) {
       if (!views.includes(v)) v = "co-cau";
       document.querySelectorAll(".tab").forEach((t) => t.setAttribute("aria-selected", String(t.dataset.view === v)));
       document.querySelectorAll(".view").forEach((s) => s.classList.toggle("active", s.id === "view-" + v));
       document.querySelectorAll(".tools").forEach((s) => (s.hidden = s.dataset.for !== v));
+      (v === "co-cau" ? zc : zp).refresh(); // khung vừa hiện: đo lại kích thước
       if (v === "co-cau" && window.coCauShow) window.coCauShow();
+      if (v === "phoi-hop" && !phFitted) { phFitted = true; zp.fit(); }
       if (v === "phoi-hop" && window.phoiHopShow) window.phoiHopShow();
     }
     document.querySelectorAll(".tab").forEach((t) =>

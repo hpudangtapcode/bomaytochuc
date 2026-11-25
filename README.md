@@ -19,6 +19,7 @@ Mở thẳng một thẻ bằng đường dẫn `.../#co-cau` hoặc `.../#phoi-
 | `doi-chieu.js` | Vẽ sơ đồ đối chiếu với doanh nghiệp mô hình tương tự (dữ liệu `DOI_CHIEU` trong `co-cau-data.js`) |
 | `phoi-hop-data.js` | **Dữ liệu phối hợp** (lấy từ "Bảng phối hợp các đơn vị thuộc Bộ Nội vụ") |
 | `phoi-hop.js` | Vẽ mũi tên phối hợp |
+| `zoom.js` | Phóng to / thu nhỏ sơ đồ (nút +/−, chụm hai ngón trên điện thoại, Ctrl + lăn chuột) |
 
 Thường chỉ cần sửa hai file dữ liệu. Hướng dẫn chi tiết nằm ở đầu mỗi file.
 

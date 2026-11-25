@@ -428,3 +428,67 @@ button.m-unit:focus-visible, button.m-tctw:focus-visible { outline: 3px solid #8
 .dc-toggle.open .dc-toggle-icon { width: 40px; height: 40px; font-size: 22px; }
 .dc-toggle.open .dc-toggle-text b { font-size: 18px; }
 @media (max-width: 640px) { .dc-toggle.open { top: auto; bottom: 14px; } }
+
+/* ===== Chữ to hơn cho dễ đọc ===== */
+.hint-bar { font-size: 15px; }
+.tab { font-size: 16px; }
+.btn { font-size: 15px; padding: 7px 14px; }
+
+/* khối Đảng, khung Địa phương */
+.m-bch { font-size: 28px; padding: 16px 32px; min-width: 760px; }
+.tctw-col { width: 184px; }
+.m-desc { font-size: 16px; line-height: 1.45; padding: 9px 10px; }
+.m-unit { font-size: 17px; min-height: 70px; padding: 8px; }
+.m-tctw { font-size: 23px; padding: 14px 24px; }
+.m-side { font-size: 18px; padding: 12px 24px; }
+.map-label { font-size: 15px; padding: 3px 8px; }
+.map-label.vert { font-size: 14.5px; }
+.pc-note { font-size: 20px; }
+.pc-tw, .pc-dp { width: 380px; }
+.m-tinhuy { font-size: 22px; min-width: 460px; }
+.m-light { font-size: 21px; min-width: 460px; padding: 14px 24px; }
+.m-note { font-size: 16.5px; width: 440px; }
+.m-child { font-size: 19px; min-width: 230px; padding: 14px 20px; }
+.btctu-children { gap: 26px; }
+.m-ubnd, .m-snv { font-size: 21px; min-width: 330px; padding: 15px 24px; }
+.dp-title { font-size: 24px; }
+.m-cp-label { font-size: 20px; }
+.m-cp { padding-top: 44px; }
+.m-ubnd { margin-top: 0; }
+
+/* cây Bộ Nội vụ */
+.lv1 { font-size: 30px; padding: 16px 44px; }
+.lv2 { font-size: 18px; width: 204px; padding: 10px 14px; }
+.lv3 { font-size: 17px; width: 172px; min-height: 66px; }
+.lv4 { font-size: 15.5px; width: 172px; }
+.list { width: 280px; }
+
+/* khung đối chiếu: phóng to cả khung cho đều */
+.dc-stage { zoom: 1.2; }
+.dc-title { font-size: 26px; }
+.dc-toggle-text b { font-size: 24px; max-width: 330px; }
+.dc-toggle-text small { font-size: 16px; }
+
+/* thẻ Phối hợp */
+.ph-groups { grid-template-columns: repeat(5, 178px); }
+.ph-group-title { font-size: 15px; }
+.ph-unit { font-size: 16px; min-height: 54px; }
+.ph-bo-title { font-size: 22px; }
+.ph-ext { font-size: 22px; }
+.ph-label { font-size: 14px; max-width: 250px; }
+.ph-side { font-size: 15.5px; width: 360px; }
+.ph-legend { font-size: 14.5px; }
+.ph-detail h2 { font-size: 22px; }
+.ph-detail h3 { font-size: 13px; }
+.dia-phuong { margin-top: 100px; }
+/* nút đối chiếu: góc dưới bên phải để ít che sơ đồ */
+.dc-toggle { top: auto; bottom: 24px; transform: none; }
+.dc-toggle.open { top: auto; bottom: 24px; }
+/* thẻ Phối hợp: màn hình dưới 1500px thì khung chi tiết xuống dưới để sơ đồ đủ chỗ */
+.ph-groups { grid-template-columns: repeat(5, 168px); }
+.ph-stage { grid-template-columns: auto 200px 170px; }
+@media (max-width: 1500px) {
+  .ph-layout { flex-direction: column; overflow-y: auto; }
+  .ph-canvas { flex: none; max-height: 80vh; }
+  .ph-side { width: auto; border-left: 0; border-top: 1px solid #E3E8F0; overflow: visible; }
+}

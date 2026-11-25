@@ -7,9 +7,9 @@
  *   children : (tùy chọn) các ô ở tầng dưới, hiện ra khi bấm vào ô
  * Kiểu ô được tự xác định theo tầng: 1 = Bộ, 2 = nhóm, 3 = đơn vị,
  * từ tầng 4 trở xuống = ô mô tả.
- * Ô đơn vị (tầng 3) có một ô con theo chuỗi: đối tượng hướng đến → công việc thực hiện
- * → (tùy chọn) danh sách items = cơ quan trực thuộc. Khi ô đơn vị đang đóng, bên dưới hiện
- * các nút "Đối tượng hướng đến", "Công việc thực hiện", "Cơ quan trực thuộc" để xem riêng từng phần.
+ * Ô đơn vị (tầng 3) có một ô con theo chuỗi: đối tượng hướng đến → CNNV (chức năng, nhiệm vụ)
+ * → (tùy chọn) danh sách items = cơ quan trực thuộc. Trên sơ đồ ba phần này gộp thành một ô,
+ * hiện ra khi bấm vào ô đơn vị.
  */
 window.CO_CAU = {
   name: "Bộ Nội vụ",

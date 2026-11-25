@@ -7,6 +7,8 @@
   const $ = (id) => document.getElementById(id);
   const stage = $("dc-stage"), svg = $("dc-svg"), panel = $("doichieu"), map = $("map");
   $("dc-title").textContent = D.title;
+  $("dc-intro").textContent = D.intro || "";
+  $("dc-intro").hidden = !D.intro;
   const COLOR = { vang: "#EBB91E", do: "#E53935", xam: "#A3ACB8" };
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 

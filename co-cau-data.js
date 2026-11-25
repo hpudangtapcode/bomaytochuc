@@ -212,11 +212,14 @@ window.BAO_QUANH = {
  */
 window.DOI_CHIEU = {
   title: "Đối chiếu với doanh nghiệp mô hình tương tự",
+  // dòng giải thích ngay dưới tiêu đề
+  intro: "Nếu đối chiếu với bộ máy chính trị, giả sử chức năng của BQLHT được tách ra tương tự: tham mưu và thi hành",
   W: 1460, H: 1200,
   boxes: [
     { id: "ctdh",     label: "CTĐH",               x: 300, y: 30,  w: 340, h: 64 },
     { id: "thammuu",  label: "Các ban tham mưu",   x: 560, y: 170, w: 330, h: 66 },
     { id: "uyquyen",  label: "Ủy quyền điều hành", x: 20,  y: 330, w: 340, h: 66 },
+    { id: "tmgv",     label: "Tham mưu, giúp việc", x: 40,  y: 480, w: 300, h: 56 },
     { id: "chucnang", label: "Các ban chức năng",  x: 620, y: 336, w: 240, h: 54 },
     { id: "cttv1",    label: "CTTV",               x: 485, y: 830, w: 150, h: 50 },
     { id: "cttv2",    label: "CTTV",               x: 825, y: 830, w: 150, h: 50 },
@@ -228,6 +231,7 @@ window.DOI_CHIEU = {
     { color: "vang", points: [[470, 94], [470, 140], [190, 140], [190, 328]] },
     { color: "vang", points: [[470, 140], [470, 306], [740, 306], [740, 334]] },
     { color: "vang", points: [[360, 363], [618, 363]], label: "chỉ đạo", at: [490, 352] },
+    { color: "vang", points: [[190, 396], [190, 478]] },
     { color: "vang", points: [[330, 396], [530, 828]], label: "chỉ đạo", at: [392, 600] },
     { color: "xam",  points: [[740, 390], [740, 420], [560, 420], [560, 828]] },
     { color: "xam",  points: [[740, 420], [900, 420], [900, 828]], label: "hướng dẫn, quy định", at: [740, 446] },
@@ -267,7 +271,7 @@ window.DOI_CHIEU = {
       ]
     },
     {
-      no: 3, x: 20, y: 690, w: 400, link: [[150, 396], [150, 690]],
+      no: 3, x: 20, y: 690, w: 400, link: [[150, 536], [150, 690]],
       title: "Trao quyền ban hành quy tắc phù hợp với thực tế từng địa phương",
       loi: [
         "Quy tắc ban hành sát thực tế vận hành",

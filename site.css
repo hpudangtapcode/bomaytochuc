@@ -492,3 +492,8 @@ button.m-unit:focus-visible, button.m-tctw:focus-visible { outline: 3px solid #8
   .ph-canvas { flex: none; max-height: 80vh; }
   .ph-side { width: auto; border-left: 0; border-top: 1px solid #E3E8F0; overflow: visible; }
 }
+
+.dc-intro {
+  margin: -4px 24px 14px; padding: 12px 16px; background: #FFF4C2; border-left: 6px solid #EBB91E; border-radius: 4px;
+  font: italic 20px/1.4 var(--font); color: #3A2E00;
+}

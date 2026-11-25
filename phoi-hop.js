@@ -8,11 +8,11 @@
   const stage = $("ph-stage"), svg = $("ph-edges"), labels = $("ph-labels"), detail = $("ph-detail");
 
   const EXT = {
-    dp: { name: "Địa phương / Cấp dưới", key: "diaPhuong", type: "dp" },
+    dp: { name: "UBND địa phương / Sở Nội vụ", key: "diaPhuong", type: "dp" },
     ngang: { name: "Cơ quan bộ ngang hàng", key: "ngang", type: "ngang" }
   };
   const COLOR = { noibo: "#133A7C", dp: "#2E62AE", ngang: "#5B8ACB" }; // cùng dải xanh, đậm → nhạt
-  const TITLE = { noibo: "Trong Bộ", dp: "Địa phương / Cấp dưới", ngang: "Cơ quan bộ ngang hàng" };
+  const TITLE = { noibo: "Trong Bộ", dp: "UBND địa phương / Sở Nội vụ", ngang: "Cơ quan bộ ngang hàng" };
 
   // ---- Danh sách mũi tên
   const EDGES = [];
@@ -274,7 +274,7 @@
     if (!sel) {
       detail.innerHTML = `<h2>Phối hợp trong nội bộ BNV</h2>
         <p class="muted">Bấm vào một đơn vị để xem đơn vị đó phối hợp với ai. Mũi tên chỉ tới đơn vị hoặc khối liên quan, kèm nội dung phối hợp; các ô không liên quan được làm mờ.</p>
-        <p class="muted">Bấm vào khối <b>Địa phương / Cấp dưới</b> hoặc <b>Cơ quan bộ ngang hàng</b> để xem tất cả đơn vị có quan hệ với khối đó.</p>
+        <p class="muted">Bấm vào khối <b>UBND địa phương / Sở Nội vụ</b> hoặc <b>Cơ quan bộ ngang hàng</b> để xem tất cả đơn vị có quan hệ với khối đó.</p>
         <p class="muted"><em>Chữ nghiêng</em>: nội dung bổ sung. Esc để bỏ chọn.</p>`;
       return;
     }

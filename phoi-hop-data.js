@@ -5,7 +5,7 @@
  * Mỗi đơn vị:
  *   noiBo    : danh sách { to: <id đơn vị nhận>, text } — vẽ mũi tên trong Bộ.
  *              to: null = dịch vụ chung của cả Bộ: mũi tên tới ô "Bộ Nội vụ", chữ đặt ở chỗ trống.
- *   diaPhuong: mũi tên sang khối "Địa phương / Cấp dưới".
+ *   diaPhuong: mũi tên sang khối "UBND địa phương / Sở Nội vụ".
  *   ngang    : mũi tên sang khối "Cơ quan bộ ngang hàng".
  *   capTren  : chỉ hiện ở khung chi tiết, không vẽ.
  *   note     : ghi chú cần kiểm tra lại.

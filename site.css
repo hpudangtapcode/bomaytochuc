@@ -484,10 +484,10 @@ button.m-unit:focus-visible, button.m-tctw:focus-visible { outline: 3px solid #8
 /* nút đối chiếu: góc dưới bên phải để ít che sơ đồ */
 .dc-toggle { top: auto; bottom: 24px; transform: none; }
 .dc-toggle.open { top: auto; bottom: 24px; }
-/* thẻ Phối hợp: màn hình dưới 1500px thì khung chi tiết xuống dưới để sơ đồ đủ chỗ */
+/* thẻ Phối hợp: màn hình dưới 1750px thì khung chi tiết xuống dưới để sơ đồ đủ chỗ */
 .ph-groups { grid-template-columns: repeat(5, 168px); }
 .ph-stage { grid-template-columns: auto 200px 170px; }
-@media (max-width: 1500px) {
+@media (max-width: 1750px) {
   .ph-layout { flex-direction: column; overflow-y: auto; }
   .ph-canvas { flex: none; max-height: 80vh; }
   .ph-side { width: auto; border-left: 0; border-top: 1px solid #E3E8F0; overflow: visible; }

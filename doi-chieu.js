@@ -61,4 +61,22 @@
   };
   new ResizeObserver(fit).observe(map);
   fit();
+
+  // ---- Nút to để đóng/mở khung đối chiếu
+  const btn = $("dc-toggle"), canvas = $("tree-canvas"), small = btn.querySelector("small");
+  function setOpen(open) {
+    panel.hidden = !open;
+    btn.classList.toggle("open", open);
+    btn.setAttribute("aria-expanded", String(open));
+    small.textContent = open ? "mô hình tương tự · bấm để đóng" : "mô hình tương tự · bấm để mở";
+    requestAnimationFrame(() => {
+      const c = canvas.getBoundingClientRect();
+      const target = open ? panel : map;
+      const r = target.getBoundingClientRect();
+      const left = open ? canvas.scrollLeft + r.left - c.left - 40
+        : canvas.scrollLeft + r.left - c.left + (r.width - c.width) / 2;
+      canvas.scrollTo({ left: Math.max(0, left), top: open ? 0 : canvas.scrollTop, behavior: "smooth" });
+    });
+  }
+  btn.addEventListener("click", () => setOpen(panel.hidden));
 })();

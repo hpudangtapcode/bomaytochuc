@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Bộ máy tổ chức chính trị - BNV & BTCTW</title>
-  <link rel="stylesheet" href="site.css?v=202611250433">
+  <link rel="stylesheet" href="site.css?v=202611250434">
 </head>
 <body>
   <header class="topbar">
@@ -27,6 +27,13 @@
       <span>Bấm vào các ô của Bộ Nội vụ để mở hoặc thu gọn tầng bên dưới. Kéo chuột để di chuyển sơ đồ.</span>
       <span class="map-legend"><i class="sw chidao"></i>Chỉ đạo, định hướng <i class="sw dexuat"></i>Đề nghị lên cấp trên <i class="sw thammuu"></i>Tham mưu, hướng dẫn</span>
     </div>
+    <button type="button" class="dc-toggle" id="dc-toggle" aria-controls="doichieu" aria-expanded="false">
+      <span class="dc-toggle-icon" aria-hidden="true">⇆</span>
+      <span class="dc-toggle-text">
+        <b>Đối chiếu với doanh nghiệp</b>
+        <small>mô hình tương tự · bấm để mở</small>
+      </span>
+    </button>
     <main id="tree-canvas" class="tree-canvas">
       <div class="map-wrap">
       <div class="map" id="map">
@@ -72,7 +79,7 @@
           </div>
         </section>
       </div>
-      <aside class="doichieu" id="doichieu">
+      <aside class="doichieu" id="doichieu" hidden>
         <div class="dc-title" id="dc-title"></div>
         <div class="dc-stage" id="dc-stage">
           <svg class="dc-svg" id="dc-svg"></svg>
@@ -108,12 +115,12 @@
     </div>
   </section>
 
-  <script src="co-cau-data.js?v=202611250433"></script>
-  <script src="co-cau.js?v=202611250433"></script>
-  <script src="doi-chieu.js?v=202611250433"></script>
-  <script src="bao-quanh.js?v=202611250433"></script>
-  <script src="phoi-hop-data.js?v=202611250433"></script>
-  <script src="phoi-hop.js?v=202611250433"></script>
+  <script src="co-cau-data.js?v=202611250434"></script>
+  <script src="co-cau.js?v=202611250434"></script>
+  <script src="doi-chieu.js?v=202611250434"></script>
+  <script src="bao-quanh.js?v=202611250434"></script>
+  <script src="phoi-hop-data.js?v=202611250434"></script>
+  <script src="phoi-hop.js?v=202611250434"></script>
   <script>
   (function () {
     "use strict";

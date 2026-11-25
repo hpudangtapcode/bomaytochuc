@@ -147,12 +147,12 @@
       const g = dp.x - 30, s = P(bch.x, bch.cy + 8), t = P(tinh.x - 2, tinh.cy);
       line({ d: `M${s.x},${s.y} C${g},${s.y} ${g},${s.y} ${g},${s.y + 120} L${g},${t.y - 40} C${g},${t.y} ${g},${t.y} ${t.x},${t.y}` }, "chidao");
     }
-    // Ban tổ chức tỉnh ủy → Tỉnh ủy; Ban tổ chức tỉnh ủy → các bộ phận
-    line([P(tinh.cx, btctu.y), P(tinh.cx, tinh.b + 2)], "chidao");
+    // Ban tổ chức tỉnh ủy tham mưu lên Tỉnh ủy; các bộ phận tham mưu lên Ban tổ chức tỉnh ủy
+    line([P(tinh.cx, btctu.y), P(tinh.cx, tinh.b + 2)], "thammuu");
     line([P(btctu.r, btctu.cy), P(note.x, note.cy)], "noi");
     [...$("m-btctu-children").children].forEach((c) => {
       const b = box(c);
-      line([P(btctu.cx, btctu.b), P(b.cx, b.y - 2)], "chidao");
+      line([P(b.cx, b.y), P(btctu.cx, btctu.b + 2)], "thammuu"); // các bộ phận tham mưu lên Ban tổ chức tỉnh ủy
     });
     // Ban tổ chức tỉnh ủy → Ban Tổ chức TW: đề nghị
     {

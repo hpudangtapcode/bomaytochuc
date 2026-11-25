@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Bộ máy tổ chức chính trị - BNV & BTCTW</title>
-  <link rel="stylesheet" href="site.css?v=202611250237">
+  <link rel="stylesheet" href="site.css?v=202611250348">
 </head>
 <body>
   <header class="topbar">
@@ -28,6 +28,7 @@
       <span class="map-legend"><i class="sw chidao"></i>Chỉ đạo, định hướng <i class="sw dexuat"></i>Đề nghị lên cấp trên <i class="sw thammuu"></i>Tham mưu, hướng dẫn</span>
     </div>
     <main id="tree-canvas" class="tree-canvas">
+      <div class="map-wrap">
       <div class="map" id="map">
         <svg class="map-edges" id="map-edges"></svg>
         <div class="map-labels" id="map-labels"></div>
@@ -71,6 +72,11 @@
           </div>
         </section>
       </div>
+      <aside class="doichieu" id="doichieu">
+        <div class="dc-title" id="dc-title"></div>
+        <svg class="dc-svg" id="dc-svg"></svg>
+      </aside>
+      </div>
     </main>
   </section>
 
@@ -100,11 +106,12 @@
     </div>
   </section>
 
-  <script src="co-cau-data.js?v=202611250237"></script>
-  <script src="co-cau.js?v=202611250237"></script>
-  <script src="bao-quanh.js?v=202611250237"></script>
-  <script src="phoi-hop-data.js?v=202611250237"></script>
-  <script src="phoi-hop.js?v=202611250237"></script>
+  <script src="co-cau-data.js?v=202611250348"></script>
+  <script src="co-cau.js?v=202611250348"></script>
+  <script src="doi-chieu.js?v=202611250348"></script>
+  <script src="bao-quanh.js?v=202611250348"></script>
+  <script src="phoi-hop-data.js?v=202611250348"></script>
+  <script src="phoi-hop.js?v=202611250348"></script>
   <script>
   (function () {
     "use strict";

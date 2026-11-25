@@ -202,3 +202,38 @@ window.BAO_QUANH = {
     khongTrucTiep: "Không có quan hệ chỉ đạo trực tiếp"
   }
 };
+
+/*
+ * SƠ ĐỒ ĐỐI CHIẾU (bên phải thẻ "Bộ máy tổ chức chính trị")
+ * Toạ độ tính theo khung rộng W x cao H. Mỗi ô: x, y (góc trên trái), w, h.
+ * Mỗi mũi tên: điểm đi qua [[x,y], ...], màu (vang | do | xam), chữ và vị trí chữ.
+ */
+window.DOI_CHIEU = {
+  title: "Đối chiếu với doanh nghiệp mô hình tương tự",
+  W: 700, H: 440,
+  boxes: [
+    { id: "ctdh",     label: "CTĐH",               x: 220, y: 20,  w: 220, h: 42 },
+    { id: "thammuu",  label: "Các ban tham mưu",   x: 400, y: 110, w: 220, h: 44 },
+    { id: "uyquyen",  label: "Ủy quyền điều hành", x: 20,  y: 195, w: 230, h: 44 },
+    { id: "chucnang", label: "Các ban chức năng",  x: 450, y: 200, w: 150, h: 34 },
+    { id: "cttv1",    label: "CTTV",               x: 360, y: 285, w: 100, h: 32 },
+    { id: "cttv2",    label: "CTTV",               x: 570, y: 278, w: 100, h: 32 },
+    { id: "dm1",      label: "Đầu mối đối ứng",    x: 330, y: 345, w: 160, h: 32 },
+    { id: "dm2",      label: "Đầu mối đối ứng",    x: 520, y: 395, w: 160, h: 32 }
+  ],
+  edges: [
+    { color: "do",   points: [[510, 110], [510, 86], [330, 86], [330, 64]] },
+    { color: "vang", points: [[330, 62], [330, 128], [135, 128], [135, 193]] },
+    { color: "vang", points: [[330, 128], [330, 186], [525, 186], [525, 198]] },
+    { color: "vang", points: [[250, 212], [448, 212]], label: "chỉ đạo", at: [345, 204] },
+    { color: "vang", points: [[250, 226], [408, 283]], label: "chỉ đạo", at: [318, 238] },
+    { color: "xam",  points: [[525, 234], [525, 250], [410, 250], [410, 283]] },
+    { color: "xam",  points: [[525, 250], [620, 250], [620, 276]], label: "hướng dẫn, quy định", at: [515, 267] },
+    { color: "xam",  points: [[410, 317], [410, 343]] },
+    { color: "xam",  points: [[620, 310], [620, 393]] }
+  ],
+  // chữ đứng riêng
+  notes: [
+    { text: "hướng dẫn tất cả đối tượng liên quan", at: [510, 174] }
+  ]
+};

@@ -546,3 +546,20 @@ button.m-unit:focus-visible, button.m-tctw:focus-visible { outline: 3px solid #8
 .tree .combo ul::before { display: none; }
 .tree .combo li { display: list-item; list-style: disc; padding: 1px 0; }
 .tree .combo li::before, .tree .combo li::after { display: none; }
+
+/* Hai thẻ trên cùng: dạng nút nổi bật */
+.tabs { gap: 8px; align-self: center; padding: 8px 0; }
+.tab {
+  font: 700 17px var(--ui); color: #fff; padding: 9px 18px; border-radius: 8px;
+  background: rgba(255,255,255,.1); border: 1.5px solid rgba(255,255,255,.4);
+  transition: background .15s, color .15s;
+}
+.tab:hover { background: rgba(255,255,255,.2); border-color: rgba(255,255,255,.7); }
+.tab[aria-selected="true"] {
+  background: #fff; color: var(--navy); border-color: #fff; box-shadow: 0 2px 8px rgba(0,0,0,.25);
+}
+.tab:focus-visible { outline: 3px solid #FFDD57; outline-offset: 2px; }
+@media (max-width: 760px) {
+  .tabs { padding: 4px 0 0; gap: 6px; }
+  .tab { font-size: 15px; padding: 8px 6px; }
+}

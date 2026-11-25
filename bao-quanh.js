@@ -156,9 +156,16 @@
     });
     // Ban tổ chức tỉnh ủy → Ban Tổ chức TW: đề nghị
     {
-      const s = P(btctu.r, btctu.y + 8);
-      const t = P(Math.min(Math.max(btctu.r + 90, tctw.x + 30), tctw.r - 30), tctw.b + 2);
-      line([s, P(s.x + 70, s.y), P(t.x, t.y + 90), t], "dexuat", D.tinhUy.deNghi, "side");
+      // ra bên phải một đoạn ngắn rồi đi thẳng dọc lên; chữ xoay dọc, nằm sát đường
+      const x = btctu.r + 34, s = P(btctu.r, btctu.cy);
+      const under = x >= tctw.x + 20; // thanh Ban TCTW có nằm ngay phía trên không (khi thu gọn thì hẹp lại)
+      const top = under ? tctw.b + 2 : tctw.cy;
+      const tail = under ? `L${x},${top}` : `L${x},${top + 8} Q${x},${top} ${x + 8},${top} L${tctw.x - 2},${top}`;
+      line({ d: `M${s.x},${s.y} L${x - 8},${s.y} Q${x},${s.y} ${x},${s.y - 8} ${tail}` }, "dexuat");
+      const l = div("map-label vert", D.tinhUy.deNghi);
+      l.style.left = x + 11 + "px";
+      l.style.top = (top + s.y) / 2 + "px";
+      labels.appendChild(l);
     }
     // Tỉnh ủy → UBND, HĐND
     {
@@ -191,12 +198,13 @@
       }
       // Ban Tổ chức TW ✕ Bộ Nội vụ
       {
-        const s = P(tctw.x + tctw.w * 0.72, tctw.b), t = P(root.cx + root.w * 0.15, root.y);
+        // đường thẳng dọc; dấu ✕ đặt ở khoảng trống giữa Ban TCTW và khung Địa phương
+        const X = root.cx + root.w * 0.15, s = P(X, tctw.b), t = P(X, root.y);
         line([s, t], "khong");
         const x = div("map-x", "✕");
         x.title = D.nhaNuoc.khongTrucTiep;
-        x.style.left = (s.x + t.x) / 2 + "px";
-        x.style.top = (s.y + t.y) / 2 + "px";
+        x.style.left = X + "px";
+        x.style.top = (tctw.b + dp.y) / 2 + "px";
         labels.appendChild(x);
       }
     }

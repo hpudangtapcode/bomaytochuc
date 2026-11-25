@@ -281,9 +281,9 @@ window.DOI_CHIEU = {
       ],
       hai: [
         "Tiềm ẩn rủi ro không thấy trước",
-        "Có thể bỏ qua quy tắc, tuân thủ máy móc, hoặc biết bất cập nhưng không đề xuất và thực hiện sai thực tế"
-      ],
-      ket: "Quy tắc ban hành thiếu cơ chế kiểm chứng sẽ chỉ được thực hiện về mặt hồ sơ, không làm thay đổi hành vi"
+        "Có thể bỏ qua quy tắc, tuân thủ máy móc, hoặc biết bất cập nhưng không đề xuất và thực hiện sai thực tế",
+        "Quy tắc ban hành thiếu cơ chế kiểm chứng sẽ chỉ được thực hiện về mặt hồ sơ, không làm thay đổi hành vi"
+      ]
     },
     {
       no: 4, x: 1010, y: 760, w: 440, link: [[975, 855], [1010, 855]],

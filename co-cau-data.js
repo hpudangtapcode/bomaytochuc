@@ -205,35 +205,75 @@ window.BAO_QUANH = {
 
 /*
  * SƠ ĐỒ ĐỐI CHIẾU (bên phải thẻ "Bộ máy tổ chức chính trị")
- * Toạ độ tính theo khung rộng W x cao H. Mỗi ô: x, y (góc trên trái), w, h.
- * Mỗi mũi tên: điểm đi qua [[x,y], ...], màu (vang | do | xam), chữ và vị trí chữ.
+ * Toạ độ tính theo khung rộng W x cao H (đơn vị px).
+ *   boxes: ô vàng — x, y (góc trên trái), w, h
+ *   edges: mũi tên — các điểm đi qua, màu (vang | do | xam), chữ và vị trí chữ
+ *   notes: ô chú giải — vị trí, nối tới đâu (link: [từ, đến]), nội dung
  */
 window.DOI_CHIEU = {
   title: "Đối chiếu với doanh nghiệp mô hình tương tự",
-  W: 700, H: 440,
+  W: 1460, H: 1130,
   boxes: [
-    { id: "ctdh",     label: "CTĐH",               x: 220, y: 20,  w: 220, h: 42 },
-    { id: "thammuu",  label: "Các ban tham mưu",   x: 400, y: 110, w: 220, h: 44 },
-    { id: "uyquyen",  label: "Ủy quyền điều hành", x: 20,  y: 195, w: 230, h: 44 },
-    { id: "chucnang", label: "Các ban chức năng",  x: 450, y: 200, w: 150, h: 34 },
-    { id: "cttv1",    label: "CTTV",               x: 360, y: 285, w: 100, h: 32 },
-    { id: "cttv2",    label: "CTTV",               x: 570, y: 278, w: 100, h: 32 },
-    { id: "dm1",      label: "Đầu mối đối ứng",    x: 330, y: 345, w: 160, h: 32 },
-    { id: "dm2",      label: "Đầu mối đối ứng",    x: 520, y: 395, w: 160, h: 32 }
+    { id: "ctdh",     label: "CTĐH",               x: 300, y: 30,  w: 340, h: 64 },
+    { id: "thammuu",  label: "Các ban tham mưu",   x: 560, y: 170, w: 330, h: 66 },
+    { id: "uyquyen",  label: "Ủy quyền điều hành", x: 20,  y: 330, w: 340, h: 66 },
+    { id: "chucnang", label: "Các ban chức năng",  x: 620, y: 336, w: 240, h: 54 },
+    { id: "cttv1",    label: "CTTV",               x: 485, y: 600, w: 150, h: 50 },
+    { id: "cttv2",    label: "CTTV",               x: 825, y: 600, w: 150, h: 50 },
+    { id: "dm1",      label: "Đầu mối đối ứng",    x: 440, y: 710, w: 240, h: 50 },
+    { id: "dm2",      label: "Đầu mối đối ứng",    x: 780, y: 780, w: 240, h: 50 }
   ],
   edges: [
-    { color: "do",   points: [[510, 110], [510, 86], [330, 86], [330, 64]] },
-    { color: "vang", points: [[330, 62], [330, 128], [135, 128], [135, 193]] },
-    { color: "vang", points: [[330, 128], [330, 186], [525, 186], [525, 198]] },
-    { color: "vang", points: [[250, 212], [448, 212]], label: "chỉ đạo", at: [345, 204] },
-    { color: "vang", points: [[250, 226], [408, 283]], label: "chỉ đạo", at: [318, 238] },
-    { color: "xam",  points: [[525, 234], [525, 250], [410, 250], [410, 283]] },
-    { color: "xam",  points: [[525, 250], [620, 250], [620, 276]], label: "hướng dẫn, quy định", at: [515, 267] },
-    { color: "xam",  points: [[410, 317], [410, 343]] },
-    { color: "xam",  points: [[620, 310], [620, 393]] }
+    { color: "do",   points: [[725, 170], [725, 122], [505, 122], [505, 96]] },
+    { color: "vang", points: [[470, 94], [470, 140], [190, 140], [190, 328]] },
+    { color: "vang", points: [[470, 140], [470, 306], [740, 306], [740, 334]] },
+    { color: "vang", points: [[360, 363], [618, 363]], label: "chỉ đạo", at: [490, 352] },
+    { color: "vang", points: [[330, 396], [530, 598]], label: "chỉ đạo", at: [398, 512] },
+    { color: "xam",  points: [[740, 390], [740, 420], [560, 420], [560, 598]] },
+    { color: "xam",  points: [[740, 420], [900, 420], [900, 598]], label: "hướng dẫn, quy định", at: [740, 446] },
+    { color: "xam",  points: [[560, 650], [560, 708]] },
+    { color: "xam",  points: [[900, 650], [900, 778]] }
   ],
-  // chữ đứng riêng
+  labels: [
+    { text: "hướng dẫn tất cả đối tượng liên quan", at: [725, 266] }
+  ],
   notes: [
-    { text: "hướng dẫn tất cả đối tượng liên quan", at: [510, 174] }
+    {
+      no: 1, x: 1010, y: 20, w: 440, link: [[890, 203], [1010, 203]],
+      title: "Các ban tham mưu",
+      points: [
+        "Tách bạch chức năng tham mưu với chức năng quyết định, thi hành",
+        "Có thẩm quyền thu thập dữ liệu quá khứ, dữ liệu thi hành và yêu cầu cập nhật dữ liệu",
+        "Có cơ quan chuyên trách cung cấp nền tảng học thuật, phối hợp với các đơn vị nghiên cứu của các trường đại học",
+        "Thực hiện các báo cáo sơ kết, tổng kết"
+      ],
+      loi: [
+        "Bên tham mưu không cần chịu trách nhiệm cho thi hành, nên có thể đề xuất những phương án khó thực hiện nhưng đúng",
+        "Tham mưu sai sự thật thì tham mưu chịu trách nhiệm",
+        "Góc nhìn khách quan"
+      ],
+      hai: [
+        "Dẫn đến tham mưu xa rời thực tế; dù có lấy ý kiến tham mưu nhưng văn bản luân chuyển nhiều vòng, triển khai chậm; nếu thiếu quyết tâm của lãnh đạo thì khó thi hành",
+        "Thiếu dữ liệu chuẩn hóa (về loại dữ liệu, thời điểm cập nhật) hoặc thiếu bộ phận chuyên trách phân tích dữ liệu thì không có cơ sở ra quyết định dựa trên dữ liệu"
+      ]
+    },
+    {
+      no: 2, x: 590, y: 462, w: 300, link: null,
+      text: "Mỗi bên ban hành quy tắc thuộc chuyên môn của mình, gồm quy tắc trong chỉ đạo và quy tắc trong thi hành"
+    },
+    {
+      no: 3, x: 20, y: 690, w: 400, link: [[150, 396], [150, 690]],
+      title: "Trao quyền ban hành quy tắc phù hợp với thực tế từng địa phương",
+      loi: [
+        "Quy tắc ban hành sát thực tế vận hành",
+        "Tự ban hành theo nhu cầu thì tốc độ công việc cao hơn",
+        "Tự chịu trách nhiệm cho quy tắc của mình"
+      ],
+      hai: [
+        "Tiềm ẩn rủi ro không thấy trước",
+        "Có thể bỏ qua quy tắc, tuân thủ máy móc, hoặc biết bất cập nhưng không đề xuất và thực hiện sai thực tế"
+      ],
+      ket: "Quy tắc ban hành thiếu cơ chế kiểm chứng sẽ chỉ được thực hiện về mặt hồ sơ, không làm thay đổi hành vi"
+    }
   ]
 };

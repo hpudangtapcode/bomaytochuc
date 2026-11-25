@@ -221,7 +221,7 @@ window.DOI_CHIEU = {
     { id: "cttv1",    label: "CTTV",               x: 485, y: 830, w: 150, h: 50 },
     { id: "cttv2",    label: "CTTV",               x: 825, y: 830, w: 150, h: 50 },
     { id: "dm1",      label: "Đầu mối đối ứng",    x: 440, y: 950, w: 240, h: 50 },
-    { id: "dm2",      label: "Đầu mối đối ứng",    x: 780, y: 1030, w: 240, h: 50 }
+    { id: "dm2",      label: "Đầu mối đối ứng",    x: 745, y: 1030, w: 240, h: 50 }
   ],
   edges: [
     { color: "do",   points: [[725, 170], [725, 122], [505, 122], [505, 96]] },
@@ -279,6 +279,19 @@ window.DOI_CHIEU = {
         "Có thể bỏ qua quy tắc, tuân thủ máy móc, hoặc biết bất cập nhưng không đề xuất và thực hiện sai thực tế"
       ],
       ket: "Quy tắc ban hành thiếu cơ chế kiểm chứng sẽ chỉ được thực hiện về mặt hồ sơ, không làm thay đổi hành vi"
+    },
+    {
+      no: 4, x: 1010, y: 760, w: 440, link: [[975, 855], [1010, 855]],
+      title: "CTTV: nhận chỉ thị và chỉ đạo xuống đầu mối đối ứng",
+      loi: [
+        "Tự chịu trách nhiệm cho hiệu quả hoạt động, mục tiêu của mình",
+        "Sát sao với hoạt động, làm đầu mối tập trung cho thông tin chuyển lên/xuống"
+      ],
+      hai: [
+        "Thời gian chuyển giao quyết định, hướng dẫn lâu",
+        "Che giấu nội bộ về khiếm khuyết hoặc làm lệch dữ liệu tham mưu",
+        "Cần có chuyên môn và năng lực tự điều hành"
+      ]
     }
   ]
 };

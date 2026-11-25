@@ -409,7 +409,7 @@ button.m-unit:focus-visible, button.m-tctw:focus-visible { outline: 3px solid #8
   width: 54px; height: 54px; border-radius: 50%; background: #3A2E00; color: #FFDD57;
   display: flex; align-items: center; justify-content: center; font: bold 30px/1 var(--ui); flex: none;
 }
-.dc-toggle-text b { display: block; font: bold 22px/1.2 var(--font); }
+.dc-toggle-text b { display: block; font: bold 22px/1.2 var(--font); max-width: 300px; }
 .dc-toggle-text small { display: block; font: 15px var(--ui); margin-top: 4px; opacity: .85; }
 .dc-toggle.open { background: #3A2E00; color: #FFDD57; border-color: #3A2E00; }
 .dc-toggle.open .dc-toggle-icon { background: #FFDD57; color: #3A2E00; }

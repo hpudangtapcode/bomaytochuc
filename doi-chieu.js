@@ -68,7 +68,7 @@
     panel.hidden = !open;
     btn.classList.toggle("open", open);
     btn.setAttribute("aria-expanded", String(open));
-    small.textContent = open ? "mô hình tương tự · bấm để đóng" : "mô hình tương tự · bấm để mở";
+    small.textContent = open ? "Bấm để đóng" : "Bấm để mở";
     requestAnimationFrame(() => {
       const c = canvas.getBoundingClientRect();
       const target = open ? panel : map;

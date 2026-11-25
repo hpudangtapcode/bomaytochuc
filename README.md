@@ -1,9 +1,9 @@
-# Bộ máy tổ chức - Bộ Nội vụ
+# Bộ máy tổ chức chính trị - BNV & BTCTW
 
 Trang web tĩnh gồm hai thẻ:
 
-- **Cơ cấu tổ chức**: sơ đồ tổng thể. Phía trên là khối Đảng (Ban Chấp hành TW, Ban Tổ chức TW, Tỉnh ủy, Ban tổ chức tỉnh ủy); phía dưới là Bộ Nội vụ trong Bộ máy Chính phủ và UBND, HĐND. Mũi tên cam là chỉ đạo, định hướng. Bấm vào các ô của Bộ Nội vụ để mở tầng bên dưới.
-- **Phối hợp**: bấm vào một đơn vị để thấy mũi tên chỉ tới các đơn vị khác trong Bộ, tới khối *Địa phương / Cấp dưới* và khối *Cơ quan bộ ngang hàng*, kèm nội dung phối hợp; các ô không liên quan được làm mờ. Bấm vào một trong hai khối để xem mọi đơn vị có quan hệ với khối đó.
+- **Bộ máy tổ chức chính trị - BNV & BTCTW**: phía trên là Ban Chấp hành TW và Ban Tổ chức TW (bấm để đóng/mở các vụ, cục); khung đỏ nét đứt "Địa phương" gồm Tỉnh ủy, Ban tổ chức tỉnh ủy, UBND/HĐND, Sở Nội vụ; phía dưới là Bộ Nội vụ trong Bộ máy Chính phủ (bấm để mở từng tầng). Mũi tên cam là chỉ đạo, định hướng.
+- **Phối hợp trong nội bộ BNV**: bấm vào một đơn vị để thấy mũi tên chỉ tới các đơn vị khác trong Bộ, tới khối *Địa phương / Cấp dưới* và khối *Cơ quan bộ ngang hàng*, kèm nội dung phối hợp; các ô không liên quan được làm mờ. Bấm vào một trong hai khối để xem mọi đơn vị có quan hệ với khối đó.
 
 Mở thẳng một thẻ bằng đường dẫn `.../#co-cau` hoặc `.../#phoi-hop`.
 

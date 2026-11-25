@@ -333,3 +333,25 @@ button.m-unit:focus-visible, button.m-tctw:focus-visible { outline: 3px solid #8
 .m-tctw.open .toggle, .m-unit.open .toggle { background: var(--navy); border-color: #fff; color: #fff; }
 .m-desc.closed, .tctw-units.closed { display: none; }
 .m-desc.opening, .tctw-units.opening { animation: drop .22s ease-out; }
+
+/* Khung Địa phương */
+.pc-note { font: italic 16px/1.4 var(--font); color: var(--navy); }
+.pc-tw { position: absolute; right: 28px; bottom: calc(100% + 12px); width: 320px; text-align: center; }
+.dia-phuong {
+  position: relative; z-index: 1; align-self: stretch; margin-top: 56px;
+  border: 2px dashed #E53935; background: rgba(15,23,42,.035);
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 80px;
+  padding: 34px 48px 52px;
+}
+.dp-left { display: flex; flex-direction: column; align-items: flex-start; }
+.dp-left .btctu-row { margin-top: 34px; }
+.dp-right { display: flex; flex-direction: column; align-items: center; gap: 74px; margin: 70px 300px 0 0; }
+.pc-dp { position: absolute; right: 28px; top: 24px; width: 300px; text-align: center; }
+.dp-title { position: absolute; right: 18px; bottom: 12px; color: #E53935; font: bold 18px var(--font); text-transform: uppercase; letter-spacing: .04em; }
+.m-ubnd, .m-snv { margin-top: 0; min-width: 280px; font-size: 17px; padding: 13px 24px; }
+.nhanuoc { margin-top: 90px; }
+.map-label.side { transform: translate(8px, -50%); }
+.map-x {
+  position: absolute; transform: translate(-50%, -50%); pointer-events: auto; cursor: help;
+  color: #E53935; font: bold 30px/1 var(--ui); text-shadow: 0 0 4px #fff, 0 0 4px #fff;
+}

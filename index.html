@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bộ máy tổ chức - Bộ Nội vụ</title>
-  <link rel="stylesheet" href="site.css?v=202611171010">
+  <title>Bộ máy tổ chức chính trị - BNV & BTCTW</title>
+  <link rel="stylesheet" href="site.css?v=202611250204">
 </head>
 <body>
   <header class="topbar">
     <div class="brand">Bộ Nội vụ</div>
     <nav class="tabs" role="tablist">
-      <button class="tab" role="tab" data-view="co-cau">Cơ cấu tổ chức</button>
-      <button class="tab" role="tab" data-view="phoi-hop">Phối hợp</button>
+      <button class="tab" role="tab" data-view="co-cau">Bộ máy tổ chức chính trị - BNV &amp; BTCTW</button>
+      <button class="tab" role="tab" data-view="phoi-hop">Phối hợp trong nội bộ BNV</button>
     </nav>
     <div class="tools" data-for="co-cau">
       <button id="open-all" class="btn solid">Mở tất cả</button>
@@ -43,17 +43,25 @@
               <div class="m-side" id="m-side"></div>
             </div>
           </div>
-          <div class="phan-cap">
-            <div class="pc-text pc-tw"><b>Trung ương</b><span id="m-pc-tw"></span></div>
-            <div class="pc-line"></div>
-            <div class="pc-text pc-dp"><b>Địa phương</b><span id="m-pc-dp"></span></div>
+        </section>
+
+        <!-- Khung Địa phương -->
+        <section class="dia-phuong" id="m-dp">
+          <div class="dp-left">
+            <div class="m-bar m-tinhuy" id="m-tinhuy"></div>
+            <div class="btctu-row">
+              <div class="m-light" id="m-btctu"></div>
+              <div class="m-note" id="m-btctu-note"></div>
+            </div>
+            <div class="btctu-children" id="m-btctu-children"></div>
           </div>
-          <div class="m-bar m-tinhuy" id="m-tinhuy"></div>
-          <div class="btctu-row">
-            <div class="m-light" id="m-btctu"></div>
-            <div class="m-note" id="m-btctu-note"></div>
+          <div class="dp-right">
+            <div class="pc-note pc-dp" id="m-pc-dp"></div>
+            <div class="m-bar m-ubnd" id="m-ubnd"></div>
+            <div class="m-bar m-snv" id="m-snv"></div>
           </div>
-          <div class="btctu-children" id="m-btctu-children"></div>
+          <div class="pc-note pc-tw" id="m-pc-tw"></div>
+          <div class="dp-title">Địa phương</div>
         </section>
 
         <!-- Khối Nhà nước -->
@@ -62,7 +70,6 @@
             <div class="m-cp-label" id="m-cp-label"></div>
             <div id="tree" class="tree"></div>
           </div>
-          <div class="m-bar m-ubnd" id="m-ubnd"></div>
         </section>
       </div>
     </main>
@@ -94,11 +101,11 @@
     </div>
   </section>
 
-  <script src="co-cau-data.js?v=202611171010"></script>
-  <script src="co-cau.js?v=202611171010"></script>
-  <script src="bao-quanh.js?v=202611171010"></script>
-  <script src="phoi-hop-data.js?v=202611171010"></script>
-  <script src="phoi-hop.js?v=202611171010"></script>
+  <script src="co-cau-data.js?v=202611250204"></script>
+  <script src="co-cau.js?v=202611250204"></script>
+  <script src="bao-quanh.js?v=202611250204"></script>
+  <script src="phoi-hop-data.js?v=202611250204"></script>
+  <script src="phoi-hop.js?v=202611250204"></script>
   <script>
   (function () {
     "use strict";

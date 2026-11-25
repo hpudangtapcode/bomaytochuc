@@ -66,6 +66,7 @@
   D.tinhUy.children.forEach((c) => $("m-btctu-children").appendChild(div("m-child", c)));
   $("m-cp-label").textContent = D.nhaNuoc.chinhPhu;
   $("m-ubnd").textContent = D.nhaNuoc.ubnd;
+  $("m-snv").textContent = D.nhaNuoc.soNoiVu;
 
   // ---- Vẽ mũi tên
   function box(el) {
@@ -88,13 +89,14 @@
     chidao: { stroke: ORANGE, width: 2.2, marker: "mk-o" },
     dexuat: { stroke: ORANGE, width: 2, dash: "7 5", marker: "mk-o" },
     thammuu: { stroke: TM, width: 1.4, marker: "mk-b" },
-    noi: { stroke: GREY, width: 1, marker: null }
+    noi: { stroke: GREY, width: 1, marker: null },
+    khong: { stroke: "#4B5563", width: 1.2, dash: "4 4", marker: null }
   };
 
   // p: 2 điểm (thẳng) hoặc 4 điểm (cong)
   function line(p, kind, label, labelClass) {
     const s = STYLE[kind];
-    const d = p.length === 2 ? `M${p[0].x},${p[0].y} L${p[1].x},${p[1].y}`
+    const d = p.d ? p.d : p.length === 2 ? `M${p[0].x},${p[0].y} L${p[1].x},${p[1].y}`
       : `M${p[0].x},${p[0].y} C${p[1].x},${p[1].y} ${p[2].x},${p[2].y} ${p[3].x},${p[3].y}`;
     const path = document.createElementNS(SVGNS, "path");
     path.setAttribute("d", d);
@@ -104,7 +106,7 @@
     if (s.marker) path.setAttribute("marker-end", `url(#${s.marker})`);
     svg.appendChild(path);
     if (label) {
-      const m = p.length === 2 ? P((p[0].x + p[1].x) / 2, (p[0].y + p[1].y) / 2) : bez(p, 0.5);
+      const m = p.mid ? p.mid : p.length === 2 ? P((p[0].x + p[1].x) / 2, (p[0].y + p[1].y) / 2) : bez(p, 0.5);
       const l = div("map-label" + (labelClass ? " " + labelClass : ""), label);
       l.style.left = m.x + "px";
       l.style.top = m.y + "px";
@@ -121,7 +123,8 @@
 
     const bch = box($("m-bch")), tctw = box($("m-tctw")), side = box($("m-side"));
     const tinh = box($("m-tinhuy")), btctu = box($("m-btctu")), note = box($("m-btctu-note"));
-    const cp = box($("m-cp")), ubnd = box($("m-ubnd"));
+    const cp = box($("m-cp")), ubnd = box($("m-ubnd")), snv = box($("m-snv"));
+    const dp = box($("m-dp")), pcTw = box($("m-pc-tw"));
     const rootEl = document.querySelector("#tree .lv1");
     const root = rootEl ? box(rootEl) : null;
 
@@ -139,10 +142,13 @@
     // Ban Tổ chức TW → Đảng viên
     line([P(tctw.r, tctw.cy), P(side.x - 2, side.cy)], "thammuu", D.tctw.side.label, "blue");
 
-    // Ban Chấp hành TW → Tỉnh ủy
-    line([P(tinh.cx, bch.b), P(tinh.cx, tinh.y - 2)], "chidao");
-    // Tỉnh ủy → Ban tổ chức tỉnh ủy → các bộ phận
-    line([P(btctu.cx, tinh.b), P(btctu.cx, btctu.y - 2)], "chidao");
+    // Ban Chấp hành TW → Tỉnh ủy (đi dọc mép trái, vào cạnh trái Tỉnh ủy)
+    {
+      const g = dp.x - 30, s = P(bch.x, bch.cy + 8), t = P(tinh.x - 2, tinh.cy);
+      line({ d: `M${s.x},${s.y} C${g},${s.y} ${g},${s.y} ${g},${s.y + 120} L${g},${t.y - 40} C${g},${t.y} ${g},${t.y} ${t.x},${t.y}` }, "chidao");
+    }
+    // Ban tổ chức tỉnh ủy → Tỉnh ủy; Ban tổ chức tỉnh ủy → các bộ phận
+    line([P(tinh.cx, btctu.y), P(tinh.cx, tinh.b + 2)], "chidao");
     line([P(btctu.r, btctu.cy), P(note.x, note.cy)], "noi");
     [...$("m-btctu-children").children].forEach((c) => {
       const b = box(c);
@@ -150,33 +156,49 @@
     });
     // Ban tổ chức tỉnh ủy → Ban Tổ chức TW: đề nghị
     {
-      const s = P(btctu.x, btctu.cy);
-      const t = P(tctw.w > 600 ? tctw.x + tctw.w * 0.18 : tctw.x + 24, tctw.b + 2);
-      const lx = Math.min(s.x, t.x) - 160;
-      line([s, P(lx, s.y), P(lx, t.y + 120), t], "dexuat", D.tinhUy.deNghi);
+      const s = P(btctu.r, btctu.y + 8);
+      const t = P(Math.min(Math.max(btctu.r + 90, tctw.x + 30), tctw.r - 30), tctw.b + 2);
+      line([s, P(s.x + 70, s.y), P(t.x, t.y + 90), t], "dexuat", D.tinhUy.deNghi, "side");
+    }
+    // Tỉnh ủy → UBND, HĐND
+    {
+      const s = P(tinh.r, tinh.cy), t = P(ubnd.x - 2, ubnd.cy), dx = (t.x - s.x) * 0.45;
+      line([s, P(s.x + dx, s.y - 30), P(t.x - dx, t.y), t], "chidao");
     }
 
-    // Ban Chấp hành TW → Bộ máy Chính phủ (vòng bên trái)
+    // Ban Chấp hành TW → Bộ máy Chính phủ (dọc mép trái, ngoài khung Địa phương)
     {
-      const left = Math.min(cp.x, tctw.x, bch.x) - 120;
-      const s = P(bch.x, bch.cy), t = P(cp.x + 70, cp.y - 2);
-      line([s, P(left, s.y), P(left + 20, t.y - 200), t], "chidao");
+      const g = dp.x - 70, s = P(bch.x, bch.cy - 8), t = P(cp.x + 70, cp.y - 2);
+      line({ d: `M${s.x},${s.y} C${g},${s.y} ${g},${s.y} ${g},${s.y + 120} L${g},${t.y - 120} C${g},${t.y - 50} ${t.x},${t.y - 70} ${t.x},${t.y}` }, "chidao");
     }
-    // Ban Chấp hành TW → UBND, HĐND (vòng bên phải)
+    // Ban Chấp hành TW → UBND, HĐND (dọc mép phải, vào cạnh phải UBND)
     {
-      const right = Math.max(ubnd.r, side.r, note.r, tctw.r) + 120;
-      const s = P(bch.r, bch.cy), t = P(ubnd.cx + 40, ubnd.y - 2);
-      line([s, P(right, s.y), P(right - 20, t.y - 200), t], "chidao");
+      const g = Math.max(dp.r, side.r, tctw.r) + 50, s = P(bch.r, bch.cy), t = P(ubnd.r + 2, ubnd.cy);
+      line({ d: `M${s.x},${s.y} C${g},${s.y} ${g},${s.y} ${g},${s.y + 120} L${g},${t.y - 40} C${g},${t.y} ${g},${t.y} ${t.x},${t.y}` }, "chidao");
     }
-    // Bộ máy Chính phủ → UBND, HĐND
-    {
-      const s = P(cp.r - 70, cp.y), t = P(ubnd.x + 50, ubnd.y - 2);
-      line([s, P(s.x + 30, s.y - 90), P(t.x - 30, t.y - 90), t], "chidao");
-    }
-    // Bộ Nội vụ → UBND, HĐND
+    // UBND, HĐND → Sở Nội vụ
+    line([P(ubnd.cx, ubnd.b), P(snv.cx, snv.y - 2)], "chidao", D.nhaNuoc.ubndToSnv, "side");
+
     if (root) {
-      const s = P(root.r, root.cy), t = P(ubnd.x - 2, ubnd.cy), dx = (t.x - s.x) * 0.4;
-      line([s, P(s.x + dx, s.y), P(t.x - dx, t.y), t], "chidao", D.nhaNuoc.chiDao);
+      // Bộ Nội vụ → UBND, HĐND và → Sở Nội vụ (đường tới UBND đi vòng ngoài, không cắt nhau)
+      {
+        const s = P(root.r - 130, root.y), t = P(ubnd.x - 2, ubnd.cy);
+        line([s, P(s.x, s.y - 140), P(t.x - 170, t.y), t], "chidao", D.nhaNuoc.bnvToUbnd);
+      }
+      {
+        const s = P(root.r - 50, root.y), t = P(snv.x - 2, snv.cy);
+        line([s, P(s.x, s.y - 70), P(t.x - 70, t.y), t], "chidao", D.nhaNuoc.bnvToSnv);
+      }
+      // Ban Tổ chức TW ✕ Bộ Nội vụ
+      {
+        const s = P(tctw.x + tctw.w * 0.72, tctw.b), t = P(root.cx + root.w * 0.15, root.y);
+        line([s, t], "khong");
+        const x = div("map-x", "✕");
+        x.title = D.nhaNuoc.khongTrucTiep;
+        x.style.left = (s.x + t.x) / 2 + "px";
+        x.style.top = (s.y + t.y) / 2 + "px";
+        labels.appendChild(x);
+      }
     }
   }
 

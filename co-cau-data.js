@@ -177,9 +177,9 @@ window.BAO_QUANH = {
       { name: "Văn phòng Ban", desc: null }
     ],
     // mũi tên nhỏ bên phải thanh Ban Tổ chức Trung ương
-    side: { label: "Có văn bản hướng dẫn", name: "Đảng viên" }
+    side: { label: "Các văn bản hướng dẫn", name: "Đảng viên" }
   },
-  // chữ hai bên đường phân cấp Trung ương / Địa phương
+  // chữ ghi chú: cạnh Ban Tổ chức TW (cấp tỉnh) và trong khung Địa phương (cấp xã)
   phanCap: {
     trungUong: "Quy định, tiêu chuẩn, số tối đa, tổng biên chế nhân sự chủ chốt cấp tỉnh",
     diaPhuong: "Nhân sự chủ chốt cấp xã, nhân sự trong bộ máy địa phương"
@@ -194,6 +194,11 @@ window.BAO_QUANH = {
   nhaNuoc: {
     chinhPhu: "Bộ máy Chính phủ",
     ubnd: "UBND, HĐND",
-    chiDao: "Chỉ đạo đường lối định hướng" // mũi tên Bộ Nội vụ → UBND, HĐND
+    soNoiVu: "Sở Nội vụ",
+    ubndToSnv: "Chỉ đạo trực tiếp",           // UBND, HĐND → Sở Nội vụ
+    bnvToUbnd: "Chỉ đạo đường lối định hướng", // Bộ Nội vụ → UBND, HĐND
+    bnvToSnv: "Chỉ đạo chuyên môn",            // Bộ Nội vụ → Sở Nội vụ
+    // đường có dấu ✕ giữa Ban Tổ chức TW và Bộ Nội vụ
+    khongTrucTiep: "Không có quan hệ chỉ đạo trực tiếp"
   }
 };

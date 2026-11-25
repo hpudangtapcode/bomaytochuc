@@ -272,7 +272,7 @@
   // ---- Khung chi tiết
   function renderDetail() {
     if (!sel) {
-      detail.innerHTML = `<h2>Phối hợp giữa các đơn vị</h2>
+      detail.innerHTML = `<h2>Phối hợp trong nội bộ BNV</h2>
         <p class="muted">Bấm vào một đơn vị để xem đơn vị đó phối hợp với ai. Mũi tên chỉ tới đơn vị hoặc khối liên quan, kèm nội dung phối hợp; các ô không liên quan được làm mờ.</p>
         <p class="muted">Bấm vào khối <b>Địa phương / Cấp dưới</b> hoặc <b>Cơ quan bộ ngang hàng</b> để xem tất cả đơn vị có quan hệ với khối đó.</p>
         <p class="muted"><em>Chữ nghiêng</em>: nội dung bổ sung. Esc để bỏ chọn.</p>`;

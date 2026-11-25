@@ -71,14 +71,15 @@
     btn.classList.toggle("open", open);
     btn.setAttribute("aria-expanded", String(open));
     small.textContent = open ? "Bấm để đóng" : "Bấm để mở";
-    requestAnimationFrame(() => {
+    // chờ khung phóng to cập nhật kích thước rồi mới cuộn
+    requestAnimationFrame(() => requestAnimationFrame(() => {
       const c = canvas.getBoundingClientRect();
       const target = open ? panel : map;
       const r = target.getBoundingClientRect();
       const left = open ? canvas.scrollLeft + r.left - c.left - 40
         : canvas.scrollLeft + r.left - c.left + (r.width - c.width) / 2;
       canvas.scrollTo({ left: Math.max(0, left), top: open ? 0 : canvas.scrollTop, behavior: "smooth" });
-    });
+    }));
   }
   btn.addEventListener("click", () => setOpen(panel.hidden));
 })();

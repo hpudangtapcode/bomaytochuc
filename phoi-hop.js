@@ -72,9 +72,9 @@
 
   // ---- Hình học
   function box(el) {
-    const s = stage.getBoundingClientRect(), r = el.getBoundingClientRect();
-    const x = r.left - s.left, y = r.top - s.top;
-    return { x, y, w: r.width, h: r.height, r: x + r.width, b: y + r.height, cx: x + r.width / 2, cy: y + r.height / 2 };
+    const s = stage.getBoundingClientRect(), r = el.getBoundingClientRect(), z = window.zoomOf ? window.zoomOf(stage) : 1;
+    const x = (r.left - s.left) / z, y = (r.top - s.top) / z, w = r.width / z, h = r.height / z;
+    return { x, y, w, h, r: x + w, b: y + h, cx: x + w / 2, cy: y + h / 2 };
   }
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   const bez = (p, t) => {

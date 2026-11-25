@@ -70,9 +70,9 @@
 
   // ---- Vẽ mũi tên
   function box(el) {
-    const m = map.getBoundingClientRect(), r = el.getBoundingClientRect();
-    const x = r.left - m.left, y = r.top - m.top;
-    return { x, y, w: r.width, h: r.height, r: x + r.width, b: y + r.height, cx: x + r.width / 2, cy: y + r.height / 2 };
+    const m = map.getBoundingClientRect(), r = el.getBoundingClientRect(), z = window.zoomOf ? window.zoomOf(map) : 1;
+    const x = (r.left - m.left) / z, y = (r.top - m.top) / z, w = r.width / z, h = r.height / z;
+    return { x, y, w, h, r: x + w, b: y + h, cx: x + w / 2, cy: y + h / 2 };
   }
   const P = (x, y) => ({ x, y });
   const bez = (p, t) => {

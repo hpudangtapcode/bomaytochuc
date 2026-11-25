@@ -497,3 +497,42 @@ button.m-unit:focus-visible, button.m-tctw:focus-visible { outline: 3px solid #8
   margin: -4px 24px 14px; padding: 12px 16px; background: #FFF4C2; border-left: 6px solid #EBB91E; border-radius: 4px;
   font: italic 20px/1.4 var(--font); color: #3A2E00;
 }
+
+/* ===== Phóng to / thu nhỏ ===== */
+.zoom-sizer { margin: 0 auto; overflow: hidden; }
+.map-wrap { min-width: 0; }
+.ph-stage { margin: 0; }
+.tree-canvas, .ph-canvas { touch-action: pan-x pan-y; }
+.zoom-btn { min-width: 38px; font-weight: 700; }
+.short { display: none; }
+
+/* ===== Điện thoại ===== */
+@media (max-width: 760px) {
+  .long { display: none; }
+  .short { display: inline; }
+  .topbar { padding: 6px 10px 8px; gap: 6px; min-height: 0; flex-direction: column; align-items: stretch; }
+  .tabs { gap: 0; }
+  .tab { flex: 1; font-size: 15px; padding: 8px 4px; white-space: nowrap; }
+  .topbar .tools { margin-left: 0; justify-content: center; gap: 6px; flex-wrap: nowrap; }
+  .btn { font-size: 13.5px; padding: 6px 10px; }
+  .zoom-btn { min-width: 34px; padding: 6px 0; font-size: 16px; }
+  .hint-bar { font-size: 12.5px; padding: 6px 12px; gap: 4px; }
+  .map-legend { gap: 2px 4px; font-size: 12px; }
+  .map-legend .sw { width: 18px; margin-left: 4px; }
+  .map-legend .sw:first-child { margin-left: 0; }
+
+  .dc-toggle, .dc-toggle.open {
+    right: 10px; bottom: 12px; top: auto; transform: none;
+    padding: 6px 12px 6px 6px; gap: 8px; border-width: 2px; border-radius: 999px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.2); animation: none;
+  }
+  .dc-toggle-icon, .dc-toggle.open .dc-toggle-icon { width: 30px; height: 30px; font-size: 17px; }
+  .dc-toggle-text b, .dc-toggle.open .dc-toggle-text b { font: bold 14px/1.2 var(--ui); max-width: none; }
+  .dc-toggle-text small { display: none; }
+
+  .ph-canvas { max-height: 60vh; }
+  .ph-side { padding: 12px 14px; font-size: 15px; }
+  .ph-legend { flex-direction: row; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; }
+}
+.map-legend > span { white-space: nowrap; display: inline-flex; align-items: center; gap: 6px; }
+@media (max-width: 760px) { .map-legend .sw { margin-left: 0; } .map-legend { gap: 2px 12px; } }

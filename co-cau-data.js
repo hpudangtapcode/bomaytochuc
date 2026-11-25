@@ -115,9 +115,7 @@ window.CO_CAU = {
             { name: "Soạn thảo, thẩm định văn bản, tư vấn pháp lý cho Bộ" }
           ] }
         ] },
-        { name: "Thanh tra", children: [
-          { name: "Văn bản trước khi ban hành của nội bộ Bộ" }
-        ] },
+        { name: "Thanh tra" },
         { name: "Vụ Kế hoạch - Tài chính", children: [
           { name: "Tài sản nội bộ: tài chính, tài sản công,...", children: [
             { name: "Quản lý quy hoạch, kế hoạch, tài chính, kế toán, giá, tài sản công, đấu thầu, đầu tư công, kiểm toán nội bộ và thống kê của Bộ" }
